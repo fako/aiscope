@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "aiscope"
+version = "0.0.1"
+description = "A Datascope project that is geared towards using AI and specifically Large Language Models (LLM)."
+authors = ["Fako Berkers"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "~4.2.8"
+datagrowth = "^0.19.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
