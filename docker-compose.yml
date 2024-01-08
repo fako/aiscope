@@ -1,0 +1,38 @@
+version: '3.1'
+
+
+services:
+
+  postgres:
+    image: postgres:14
+    volumes:
+      - postgres-database:/var/lib/postgresql/data
+      - ./services/postgres/conf/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./services/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=aiscope
+      - DJANGO_POSTGRES_PASSWORD=${DJANGO_POSTGRES_PASSWORD}
+    healthcheck:
+      test: psql -U postgres aiscope -c "SELECT 'DBD::Pg ping test'"
+    ports:
+      - "127.0.0.1:5432:5432"
+
+  adminer:
+    image: adminer
+    depends_on:
+      - postgres
+    ports:
+      - "127.0.0.1:6543:8080"
+
+  redis:
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./services/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "127.0.0.1:6379:6379"
+
+volumes:
+  postgres-database:
