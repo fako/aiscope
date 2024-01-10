@@ -24,6 +24,7 @@ class TestVoteRecordsExtraction(ResourceFixturesMixin, TestCase):
         resource = DutchParlementRecordSearch.objects.first()
         # Extract content and assert
         content = list(extractor.extract_from_resource(resource))
+        self.assertEqual(len(content), 25)
         self.assertEqual(content[0], {
             "url": "https://zoek.officielebekendmakingen.nl/h-tk-20232024-13-19.html",
             "date": "2023-10-17",
@@ -38,10 +39,11 @@ class TestVoteRecordsExtraction(ResourceFixturesMixin, TestCase):
             "objective": MOTION_VOTES_OBJECTIVE
         })
         extractor = ExtractProcessor(config=config)
-        resource = DutchParlementRecord.objects.first()
+        resource = DutchParlementRecord.objects.get(uri="zoek.officielebekendmakingen.nl/h-tk-20232024-13-19.html")
         # Extract content and assert
         content = list(extractor.extract_from_resource(resource))
-        self.assertEqual(content[0],    {
+        self.assertEqual(len(content), 1)
+        self.assertEqual(content[0], {
             "url": "https://zoek.officielebekendmakingen.nl/kst-32824-405.html",
             "approve_factions": [
                 "SP",
@@ -67,4 +69,26 @@ class TestVoteRecordsExtraction(ResourceFixturesMixin, TestCase):
                 "BBB"
             ],
             "outcome": "approved"
+        })
+
+    def test_motion_votes_extraction_2006(self):
+        # Setup extraction
+        config = create_config("global", {
+            "objective": MOTION_VOTES_OBJECTIVE
+        })
+        extractor = ExtractProcessor(config=config)
+        resource = DutchParlementRecord.objects.get(uri="zoek.officielebekendmakingen.nl/h-tk-20052006-3563-3563.html")
+        # Extract content and assert
+        content = list(extractor.extract_from_resource(resource))
+        self.assertEqual(len(content), 4)
+        self.assertEqual(content[0],     {
+            "url": "https://zoek.officielebekendmakingen.nl/kst-19637-1020.html",
+            "approve_factions": [
+                "SP",
+                "GroenLinks",
+                "PvdA",
+                "ChristenUnie"
+            ],
+            "reject_factions": None,
+            "outcome": "rejected"
         })

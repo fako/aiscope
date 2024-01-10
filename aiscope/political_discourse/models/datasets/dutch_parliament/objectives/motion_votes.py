@@ -1,10 +1,18 @@
+from enum import Enum
 import re
 from dataclasses import dataclass
 import bs4
 
 
+class MotionVersion(Enum):
+    MODERN = "modern"
+    PLAIN_TEXT = "plain_text"
+    UNKNOWN = "unknown"
+
+
 @dataclass(frozen=True, slots=True)
 class MotionVoteParagraphs:
+    version: MotionVersion
     motion: bs4.Tag
     vote: bs4.Tag
 
@@ -13,6 +21,8 @@ class MotionVotesExtractor:
 
     approve_factions_pattern = r".*fracties van(?P<factions>.*) voor"
     reject_factions_pattern = r".*fracties van(?P<factions>.*) ertegen"
+
+    record_id_pattern = r"\D*(?P<record>\d+)\D*(?P<section>\d+)"
 
     @classmethod
     def parse_factions_match(cls, match):
@@ -30,21 +40,48 @@ class MotionVotesExtractor:
         return factions
 
     @classmethod
+    def find_vote_paragraph(cls, motion_paragraph: bs4.Tag, motion_version: MotionVersion):
+        vote_paragraph = None
+        match motion_version:
+            case MotionVersion.MODERN:
+                vote_paragraph = motion_paragraph.parent.find_next_sibling("div").find("div").find("p")
+            case MotionVersion.PLAIN_TEXT:
+                vote_paragraph = motion_paragraph.parent.find_next_sibling("div").find("p").find_next_sibling("p")
+            case _:
+                pass
+        return vote_paragraph
+
+    @classmethod
     def get_motion_votes(cls, soup: bs4.BeautifulSoup):
         motion_paragraphs = soup.find_all(
             lambda element: element.name == "p" and element.text.lower().startswith("in stemming komt")
         )
         for motion_paragraph in motion_paragraphs:
-            vote_paragraph = motion_paragraph.parent.find_next_sibling("div").find("div").find("p")
+            motion_version = MotionVersion.UNKNOWN
+            match motion_paragraph.parent["class"]:
+                case ["draad"]:
+                    motion_version = MotionVersion.PLAIN_TEXT
+                case ["alineagroep"]:
+                    motion_version = MotionVersion.MODERN
+            vote_paragraph = cls.find_vote_paragraph(motion_paragraph, motion_version)
             yield MotionVoteParagraphs(
+                version=motion_version,
                 motion=motion_paragraph,
                 vote=vote_paragraph
             )
 
     @classmethod
     def get_url(cls, soup: bs4.BeautifulSoup, paragraphs: MotionVoteParagraphs):
-        link_tag = paragraphs.motion.find("a")
-        return f"https://zoek.officielebekendmakingen.nl/{link_tag["href"]}"
+        href = None
+        match paragraphs.version:
+            case MotionVersion.MODERN:
+                href = paragraphs.motion.find("a")["href"]
+            case MotionVersion.PLAIN_TEXT:
+                record_id_match = re.match(cls.record_id_pattern, paragraphs.motion.text, re.IGNORECASE | re.DOTALL)
+                href = f"kst-{record_id_match.group("record")}-{record_id_match.group("section")}.html"
+            case _:
+                pass
+        return f"https://zoek.officielebekendmakingen.nl/{href}" if href else None
 
     @classmethod
     def get_approve_factions(cls, soup: bs4.BeautifulSoup, paragraphs: MotionVoteParagraphs):
@@ -53,6 +90,8 @@ class MotionVotesExtractor:
 
     @classmethod
     def get_reject_factions(cls, soup: bs4.BeautifulSoup, paragraphs: MotionVoteParagraphs):
+        if "overige fracties" in paragraphs.vote.text:
+            return
         reject_factions_match = re.match(cls.reject_factions_pattern, paragraphs.vote.text, re.IGNORECASE | re.DOTALL)
         return cls.parse_factions_match(reject_factions_match)
 

@@ -4,7 +4,7 @@ from dateutil.parser import parse as date_parser
 
 class VoteRecordsExtractor:
 
-    session_pattern = r"\D*(?P<sitting>\d+)\D*(?P<item>\d+)"
+    sitting_pattern = r"\D*(?P<sitting>\d+)\D*(?P<item>\d+)"
 
     @classmethod
     def _extract_description_value(cls, el, term):
@@ -38,8 +38,8 @@ class VoteRecordsExtractor:
     @classmethod
     def get_sitting(cls, soup, el):
         raw_session = cls._extract_description_value(el, "Vergadernummer")
-        session_match = re.match(cls.session_pattern, raw_session)
-        return f"{session_match.group("sitting")}-{session_match.group("item")}"
+        sitting_match = re.match(cls.sitting_pattern, raw_session)
+        return f"{sitting_match.group("sitting")}-{sitting_match.group("item")}"
 
     @classmethod
     def get_political_body(cls, soup, el):
