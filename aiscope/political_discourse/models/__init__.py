@@ -1,0 +1,3 @@
+from political_discourse.models.resources.dutch_parliament import DutchParlementRecordSearch, DutchParlementRecord
+from political_discourse.models.documents import DatasetVersion, Collection, Document
+from political_discourse.models.datasets.dutch_parliament.motions import DutchParliamentMotionsDataset
