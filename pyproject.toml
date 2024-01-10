@@ -19,6 +19,7 @@ datagrowth = {path = "../datagrowth", develop = true}
 pytest = "^7.4.4"
 invoke = "^2.2.0"
 pytest-django = "^4.7.0"
+flake8 = "^7.0.0"
 
 
 [tool.pytest.ini_options]
