@@ -16,6 +16,14 @@ watchdog = "^3.0.0"
 redis = "^5.0.1"
 whitenoise = "^6.6.0"
 datagrowth = {path = "../datagrowth", develop = true}
+pytest = "^7.4.4"
+invoke = "^2.2.0"
+pytest-django = "^4.7.0"
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "aiscope.settings"
+python_files = ["test_*.py", "tests.py"]
 
 
 [build-system]
