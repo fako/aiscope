@@ -21,7 +21,7 @@ class TestVoteRecordsExtraction(ResourceFixturesMixin, TestCase):
             "objective": VOTE_RECORDS_OBJECTIVE
         })
         extractor = ExtractProcessor(config=config)
-        resource = DutchParlementRecordSearch.objects.first()
+        resource = DutchParlementRecordSearch.objects.get(id=1)
         # Extract content and assert
         content = list(extractor.extract_from_resource(resource))
         self.assertEqual(len(content), 25)
@@ -32,6 +32,18 @@ class TestVoteRecordsExtraction(ResourceFixturesMixin, TestCase):
             "sitting": "13-19",
             "political_body": "Tweede Kamer der Staten-Generaal"
         })
+
+    def test_votes_search_next_request(self):
+        first_page = DutchParlementRecordSearch.objects.get(id=1)
+        next_request = first_page.create_next_request()
+        self.assertIn(
+            "pagina=2",
+            next_request["url"],
+            "Expected create_next_request to add pagina=2 to parameters to original request"
+        )
+        last_page = DutchParlementRecordSearch.objects.get(id=2)
+        next_request = last_page.create_next_request()
+        self.assertIsNone(next_request)
 
     def test_motion_votes_extraction(self):
         # Setup extraction

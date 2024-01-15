@@ -54,6 +54,60 @@
         }
     },
     {
+        "model": "political_discourse.dutchparlementrecordsearch",
+        "pk": 2,
+        "fields": {
+            "uri": "zoek.officielebekendmakingen.nl/resultaten?col=AlleParlementaireDocumenten&pagina=16&pg=50&q=%28c.product-area%3D%3D%22officielepublicaties%22%29and%28%28dt.creator%3D%3D%22Tweede+Kamer+der+Staten-Generaal%22%29or%28dt.creator%3D%3D%22Tweede+Kamer+OCV+%2F+UCV%22%29%29and%28w.publicatienaam%3D%3D%22Handelingen%22%29and%28dt.subject%3D%22Migratie+en+integratie%22%29and%28dt.date%3E%3D%222006-01-01%22+and+dt.date%3C%3D%222023-12-01%22%29&sf=ru%7CHandeling&svel=Kenmerkendedatum&svol=Aflopend",
+            "status": 200,
+            "config": "{\"_namespace\": \"global\", \"_private\": [\"_private\", \"_defaults\", \"_namespace\"], \"$start_date\": \"2006-01-01\", \"$end_date\": null}",
+            "created_at": "2024-01-09T14:29:12.366Z",
+            "modified_at": "2024-01-09T14:29:12.366Z",
+            "purge_at": null,
+            "retainer_type": null,
+            "retainer_id": null,
+            "data_hash": "",
+            "request": {
+                "url": "https://zoek.officielebekendmakingen.nl/resultaten?pg=50&col=AlleParlementaireDocumenten&svel=Kenmerkendedatum&svol=Aflopend&sf=ru%7CHandeling&q=%28c.product-area%3D%3D%22officielepublicaties%22%29and%28%28dt.creator%3D%3D%22Tweede+Kamer+der+Staten-Generaal%22%29or%28dt.creator%3D%3D%22Tweede+Kamer+OCV+%2F+UCV%22%29%29and%28w.publicatienaam%3D%3D%22Handelingen%22%29and%28dt.subject%3D%22Migratie+en+integratie%22%29and%28dt.date%3E%3D%222006-01-01%22+and+dt.date%3C%3D%222023-12-01%22%29&pagina=16",
+                "args": [
+                    "Migratie en integratie"
+                ],
+                "data": null,
+                "kwargs": {},
+                "method": "get",
+                "headers": {
+                    "Accept": "*/*",
+                    "Connection": "keep-alive",
+                    "User-Agent": "DataGrowth (v0.20.0); python-requests/2.31.0",
+                    "Accept-Encoding": "gzip, deflate"
+                },
+                "backoff_delay": false
+            },
+            "head": {
+                "date": "Tue, 09 Jan 2024 11:26:32 GMT",
+                "vary": "Accept-Encoding",
+                "pragma": "no-cache,no-cache",
+                "server": "",
+                "expires": "-1,-1",
+                "expect-ct": "enforce, max-age=30",
+                "content-type": "text/html; charset=utf-8",
+                "x-powered-by": "",
+                "x-webkit-csp": "frame-ancestors 'self'",
+                "cache-control": "no-cache,no-store",
+                "referrer-policy": "strict-origin-when-cross-origin",
+                "x-frame-options": "SAMEORIGIN, SAMEORIGIN",
+                "content-encoding": "gzip",
+                "x-xss-protection": "1; mode=block",
+                "transfer-encoding": "chunked",
+                "permissions-policy": "geolocation=(), midi=(), notifications=(), push=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(self), payment=()",
+                "x-content-type-options": "nosniff",
+                "content-security-policy": "frame-ancestors 'self'",
+                "strict-transport-security": "max-age=31536000; includeSubDomains;",
+                "x-content-security-policy": "frame-ancestors 'self'"
+            },
+            "body": "dutch-parliament-record-search.last.html"
+        }
+    },
+    {
         "model": "political_discourse.dutchparlementrecord",
         "pk": 1,
         "fields": {
