@@ -5,16 +5,20 @@ from django.utils.timezone import make_aware
 from datagrowth.datatypes import DatasetBase
 from datagrowth.datatypes.datasets.constants import GrowthStrategy
 
-from political_discourse.models.datasets.dutch_parliament.objectives import VOTE_RECORDS_OBJECTIVE
+from political_discourse.models.datasets.dutch_parliament.objectives import (
+    VOTE_RECORDS_OBJECTIVE,
+    MOTION_VOTES_OBJECTIVE
+)
 
 
 class DutchParliamentMotionsDataset(DatasetBase):
 
     GROWTH_STRATEGY = GrowthStrategy.STACK
 
+    COLLECTION_IDENTIFIER = "motion_id"
     SEEDING_PHASES = [
         {
-            "phase": "papers",
+            "phase": "vote_records",
             "strategy": "initial",
             "batch_size": 5,
             "retrieve_data": {
@@ -29,7 +33,24 @@ class DutchParliamentMotionsDataset(DatasetBase):
             "contribute_data": {
                 "objective": VOTE_RECORDS_OBJECTIVE
             }
-        }
+        },
+        {
+            "phase": "motion_votes",
+            "strategy": "merge",
+            "batch_size": 5,
+            "retrieve_data": {
+                "resource": "political_discourse.DutchParlementRecord",
+                "method": "get",
+                "args": ["$.url"],
+                "kwargs": {},
+            },
+            "contribute_data": {
+                "objective": MOTION_VOTES_OBJECTIVE,
+                "merge_base": "buffer",
+                "merge_on": "vote_record_id",
+                "composition_to": "sitting"
+            }
+        },
     ]
 
     def get_signature_from_input(self, *args, **kwargs):

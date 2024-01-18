@@ -16,14 +16,19 @@ class VoteRecordsExtractor:
     def get_vote_records(cls, soup):
         result_links = soup.find_all("a", attrs={"class": "result--subtitle"})
         for result_link in result_links:
-            if "stemming" not in result_link.text.lower():
+            if "stemming" not in result_link.text.lower() or "motie" not in result_link.text.lower():
                 continue
             yield result_link.parent.parent  # should be the <li> tag of the search result
 
     @classmethod
-    def get_url(cls, soup, el):
+    def get_vote_record_id(cls, soup, el):
         link_tag = el.find("a")
-        return f"https://zoek.officielebekendmakingen.nl/{link_tag["href"]}"
+        return link_tag["href"].replace(".html", "")
+
+    @classmethod
+    def get_url(cls, soup, el):
+        vote_record_id = cls.get_vote_record_id(soup, el)
+        return f"https://zoek.officielebekendmakingen.nl/{vote_record_id}.html"
 
     @classmethod
     def get_date(cls, soup, el):
@@ -48,6 +53,7 @@ class VoteRecordsExtractor:
 
 VOTE_RECORDS_OBJECTIVE = {
     "@": VoteRecordsExtractor.get_vote_records,
+    "vote_record_id": VoteRecordsExtractor.get_vote_record_id,
     "url": VoteRecordsExtractor.get_url,
     "date": VoteRecordsExtractor.get_date,
     "parliamentary_session": VoteRecordsExtractor.get_parliamentary_session,

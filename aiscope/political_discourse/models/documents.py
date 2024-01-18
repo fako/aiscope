@@ -6,7 +6,10 @@ class DatasetVersion(DatasetVersionBase):
 
 
 class Collection(CollectionBase):
-    pass
+
+    @property
+    def documents(self):
+        return self.document_set
 
 
 class Document(DocumentBase):

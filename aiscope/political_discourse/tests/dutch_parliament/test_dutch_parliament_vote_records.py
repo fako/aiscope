@@ -24,8 +24,9 @@ class TestVoteRecordsExtraction(ResourceFixturesMixin, TestCase):
         resource = DutchParlementRecordSearch.objects.get(id=1)
         # Extract content and assert
         content = list(extractor.extract_from_resource(resource))
-        self.assertEqual(len(content), 25)
+        self.assertEqual(len(content), 21)
         self.assertEqual(content[0], {
+            "vote_record_id": "h-tk-20232024-13-19",
             "url": "https://zoek.officielebekendmakingen.nl/h-tk-20232024-13-19.html",
             "date": "2023-10-17",
             "parliamentary_session": "2023-2024",
@@ -56,8 +57,10 @@ class TestVoteRecordsExtraction(ResourceFixturesMixin, TestCase):
         content = list(extractor.extract_from_resource(resource))
         self.assertEqual(len(content), 1)
         self.assertEqual(content[0], {
+            "vote_record_id": "h-tk-20232024-13-19",
+            "motion_id": "kst-32824-405",
             "url": "https://zoek.officielebekendmakingen.nl/kst-32824-405.html",
-            "approve_factions": [
+            "approvals": [
                 "SP",
                 "GroenLinks",
                 "BIJ1",
@@ -71,7 +74,7 @@ class TestVoteRecordsExtraction(ResourceFixturesMixin, TestCase):
                 "SGP",
                 "CDA"
             ],
-            "reject_factions": [
+            "rejections": [
                 "Lid Ephraim",
                 "VVD",
                 "JA21",
@@ -93,14 +96,62 @@ class TestVoteRecordsExtraction(ResourceFixturesMixin, TestCase):
         # Extract content and assert
         content = list(extractor.extract_from_resource(resource))
         self.assertEqual(len(content), 4)
-        self.assertEqual(content[0],     {
+        self.assertEqual(content[0], {
+            "vote_record_id": "h-tk-20052006-3563-3563",
+            "motion_id": "kst-19637-1020",
             "url": "https://zoek.officielebekendmakingen.nl/kst-19637-1020.html",
-            "approve_factions": [
+            "approvals": [
                 "SP",
                 "GroenLinks",
                 "PvdA",
                 "ChristenUnie"
             ],
-            "reject_factions": None,
+            "rejections": None,
             "outcome": "rejected"
         })
+
+    def test_motion_votes_extraction_with_head_count(self):
+        # Setup extraction
+        config = create_config("global", {
+            "objective": MOTION_VOTES_OBJECTIVE
+        })
+        extractor = ExtractProcessor(config=config)
+        resource = DutchParlementRecord.objects.get(uri="zoek.officielebekendmakingen.nl/h-tk-20232024-10-8.html")
+        # Extract content and assert
+        content = list(extractor.extract_from_resource(resource))
+        self.assertEqual(len(content), 31)
+        head_vote = content[5]
+        approvals = head_vote.pop("approvals")
+        rejections = head_vote.pop("rejections")
+        self.assertEqual(head_vote, {
+            "vote_record_id": "h-tk-20232024-10-8",
+            "motion_id": "kst-36333-44",
+            "url": "https://zoek.officielebekendmakingen.nl/kst-36333-44.html",
+            "outcome": "rejected"
+        })
+        self.assertEqual(len(approvals), 65)
+        self.assertEqual(len(rejections), 82)
+        self.assertEqual(approvals[:10], [
+             "Tielen",
+             "Valstar",
+             "Verkuijlen",
+             "Van Weerdenburg",
+             "Van Wijngaarden",
+             "Wilders",
+             "Van der Woude",
+             "Aartsen",
+             "Agema",
+             "Baudet",
+        ])
+        self.assertEqual(rejections[:10], [
+            "Thijssen",
+            "Vedder",
+            "Wassenberg",
+            "Werner",
+            "Westerveld",
+            "Van Weyenberg",
+            "Wuite",
+            "Akerboom",
+            "Alkaya",
+            "Amhaouch",
+        ])

@@ -8,7 +8,7 @@ from django.utils.timezone import make_aware
 from datagrowth.resources import HttpResource, URLResource
 
 
-class DutchParlementRecordSearch(HttpResource):  # rs.get("Migratie en integratie", "20220901", "20220930")
+class DutchParlementRecordSearch(HttpResource):
 
     uri = models.CharField(max_length=1024, db_index=True, default=None)
 
