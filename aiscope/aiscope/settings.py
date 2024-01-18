@@ -139,8 +139,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Celery
 # https://docs.celeryq.dev/en/v5.3.6/getting-started/introduction.html
 
-CELERY_BROKER_URL = 'redis://redis/0'
-CELERY_RESULT_BACKEND = 'redis://redis/0'
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
 CELERY_WORKER_HIJACK_ROOT_LOGGER = True  # probable not in the cloud though ...
 CELERY_WORKER_MAX_TASKS_PER_CHILD = 50
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
