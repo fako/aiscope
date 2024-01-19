@@ -7,7 +7,8 @@ from datagrowth.resources.testing import ResourceFixturesMixin
 from political_discourse.models import DutchParlementRecordSearch, DutchParlementRecord
 from political_discourse.models.datasets.dutch_parliament.objectives import (
     VOTE_RECORDS_OBJECTIVE,
-    MOTION_VOTES_OBJECTIVE
+    MOTION_VOTES_OBJECTIVE,
+    MOTION_CONTENT_OBJECTIVE
 )
 
 
@@ -155,3 +156,87 @@ class TestVoteRecordsExtraction(ResourceFixturesMixin, TestCase):
             "Alkaya",
             "Amhaouch",
         ])
+
+
+class TestMotionRecordsExtraction(ResourceFixturesMixin, TestCase):
+
+    resource_fixtures = ["dutch-parliament"]
+
+    def test_government_request(self):
+        # Setup extraction
+        config = create_config("global", {
+            "objective": MOTION_CONTENT_OBJECTIVE
+        })
+        extractor = ExtractProcessor(config=config)
+        resource = DutchParlementRecord.objects.get(uri="zoek.officielebekendmakingen.nl/kst-19637-1020.html")
+        # Extract content and assert
+        content = list(extractor.extract_from_resource(resource))
+        self.assertEqual(content[0], {
+            "motion_id": "kst-19637-1020",
+            "action": {
+                "type": "request",
+                "audience": "de regering",
+                "text": "in het nieuwe ambtsbericht over de democratische republiek congo "
+                        "alle beschikbare betrouwbare bronnen te betrekken en tot uitdrukking te brengen",
+                "points": []
+            },
+            "observations": [],
+            "considerations": [
+                "het kabinet in navolging van de commissie-havermans van oordeel is, "
+                "dat de congolese autoriteiten van elke door nederland uitgezette congolees aannemen, "
+                "dat deze asiel heeft gevraagd, tenzij het tegendeel blijkt",
+                "het ambtsbericht van het ministerie van buitenlandse zaken "
+                "over de democratische republiek congo van september 2005 slechts beperkt informatie verschaft "
+                "over de geraadpleegde bronnen met betrekking tot het karakter van "
+                "de direction g\u00e9n\u00e9rale de migration en de risico\u2019s bij terugkeer als "
+                "bekend is dat iemand asiel heeft gevraagd",
+                "diverse bronnen, waaronder het ambtsbericht van het verenigd koninkrijk, "
+                "terzake van deze onderwerpen andere informatie bevatten dan het nederlandse ambtsbericht",
+                "deze bronnen deels van recentere datum en daardoor actueler zijn dan het ambtsbericht",
+                "daardoor een alomvattend beeld ontbreekt over de mogelijke risico\u2019s die uitgezette congolese "
+                "ex-asielzoekers momenteel bij aankomst te kinshasa lopen",
+                "de unhcr ervoor waarschuwt dat congolese staatsburgers met een militaire of politieke achtergrond "
+                "bij terugkeer naar congo extra gevaar lopen, indien bekend is dat zij asiel hebben gevraagd"
+            ],
+            "opinions": []
+        })
+
+    def test_institute_request(self):
+        # Setup extraction
+        config = create_config("global", {
+            "objective": MOTION_CONTENT_OBJECTIVE
+        })
+        extractor = ExtractProcessor(config=config)
+        resource = DutchParlementRecord.objects.get(uri="zoek.officielebekendmakingen.nl/kst-32824-405.html")
+        # Extract content and assert
+        content = list(extractor.extract_from_resource(resource))
+        self.assertEqual(content[0],     {
+            "motion_id": "kst-32824-405",
+            "action": {
+                "type": "suggestion",
+                "audience": "de autoriteit persoonsgegevens",
+                "text": "onderzoek te doen naar de volgende aspecten",
+                "points": [
+                    "door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld",
+                    "met welke actoren deze informatie vervolgens is gedeeld",
+                    "wat er met deze persoonsgegevens is gedaan, of het is gebruikt voor besluiten en "
+                    "of er mogelijk gevolgen zijn geweest voor Nederlandse moslims "
+                    "door de registratie van hun persoonsgegevens"
+                ]
+            },
+            "observations": [
+                "er gegevens zijn verzameld over de nederlandse moslimgemeenschap zonder wettelijke grondslag"
+            ],
+            "considerations": [
+                "dit is gedaan door onderdelen van de nederlandse overheid, "
+                "waar verschillende ministeries en organisaties deel van uitmaken, "
+                "zoals de taskforce problematisch gedrag, "
+                "zodat persoonsgegevens op meerdere plekken zouden kunnen zijn opgeslagen",
+                "persoonsgegevens ook zijn gedeeld met gemeenten, de politie, ministeries en veiligheidspartners "
+                "door de leden van de taskforce problematisch gedrag"
+            ],
+            "opinions": [
+                "voorkomen dient te worden dat persoonsgegevens van nederlandse moslims nog ergens rondslingeren "
+                "of dat de gegevens nog worden gebruikt"
+            ]
+        })
