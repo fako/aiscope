@@ -8,7 +8,8 @@ from datagrowth.datatypes.datasets.constants import GrowthStrategy
 
 from political_discourse.models.datasets.dutch_parliament.objectives import (
     VOTE_RECORDS_OBJECTIVE,
-    MOTION_VOTES_OBJECTIVE
+    MOTION_VOTES_OBJECTIVE,
+    MOTION_CONTENT_OBJECTIVE
 )
 
 
@@ -50,7 +51,7 @@ class DutchParliamentMotionsDataset(DatasetBase):
             "retrieve_data": {
                 "resource": "political_discourse.DutchParlementRecord",
                 "method": "get",
-                "args": ["$.url"],
+                "args": ["$.url"],  # will be the sitting url
                 "kwargs": {},
             },
             "contribute_data": {
@@ -58,6 +59,20 @@ class DutchParliamentMotionsDataset(DatasetBase):
                 "merge_base": "buffer",
                 "merge_on": "vote_record_id",
                 "composition_to": "sitting"
+            }
+        },
+        {
+            "phase": "motion_content",
+            "strategy": "merge",
+            "batch_size": 5,
+            "retrieve_data": {
+                "resource": "political_discourse.DutchParlementRecord",
+                "method": "get",
+                "args": ["$.url"],  # will be the motion url
+                "kwargs": {},
+            },
+            "contribute_data": {
+                "objective": MOTION_CONTENT_OBJECTIVE,
             }
         },
     ]
