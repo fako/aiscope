@@ -76,6 +76,13 @@ class DutchParliamentMotionsDataset(DatasetBase):
             }
         },
     ]
+    DOCUMENT_TASKS = {
+        "dutch_parliament.get_claim_texts": {
+            "depends_on": ["$.action", "$.premises"],
+            "resources": [],
+            "checks": []
+        }
+    }
 
     def get_signature_from_input(self, *args, **kwargs):
         """

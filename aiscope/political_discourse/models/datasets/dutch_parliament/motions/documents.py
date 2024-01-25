@@ -1,3 +1,4 @@
+from hashlib import sha1
 from django.db import models
 
 from datagrowth.datatypes import DatasetVersionBase, CollectionBase, DocumentBase
@@ -64,3 +65,17 @@ class MotionDocument(MotionDatastorageMixin, DocumentBase):
             argument += f"Doet {action["audience"]} de suggestie om {action_text}"
 
         return argument.strip()
+
+    def get_claim_texts(self) -> dict[str, str] | None:
+        if not (action := self.properties.get("action")) or not (premises := self.properties.get("premises")):
+            return
+
+        texts = {}
+        for _, premise in premises:
+            key = sha1(premise.encode("utf-8")).hexdigest()
+            texts[key] = premise
+        for point in action["points"]:
+            key = sha1(point.encode("utf-8")).hexdigest()
+            texts[key] = point
+
+        return texts
