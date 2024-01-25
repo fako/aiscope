@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.utils.timezone import make_aware
+from django.contrib.contenttypes.fields import GenericRelation
 
 from datagrowth.datatypes import DatasetBase
 from datagrowth.datatypes.datasets.constants import GrowthStrategy
@@ -13,8 +14,16 @@ from political_discourse.models.datasets.dutch_parliament.objectives import (
 
 class DutchParliamentMotionsDataset(DatasetBase):
 
+    versions = GenericRelation(
+        "MotionDatasetVersion",
+        content_type_field="dataset_type",
+        object_id_field="dataset_id",
+        related_query_name="datasets"
+    )
+
     GROWTH_STRATEGY = GrowthStrategy.STACK
 
+    DATASET_VERSION_MODEL = "MotionDatasetVersion"
     COLLECTION_IDENTIFIER = "motion_id"
     SEEDING_PHASES = [
         {
