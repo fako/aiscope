@@ -8,6 +8,12 @@ class ActionTypes(Enum):
     SUGGESTION = "suggestion"
 
 
+class PremiseTypes(Enum):
+    OBSERVATION = "observation"
+    CONSIDERATION = "consideration"
+    OPINION = "opinion"
+
+
 class MotionContentExtractor:
 
     request_pattern = "verzoekt (?P<audience>.*) om (?P<content>.*?)[,:]"
@@ -31,9 +37,10 @@ class MotionContentExtractor:
     @classmethod
     def parse_content_paragraph(cls, paragraph: bs4.Tag, pattern: str) -> str | None:
         content_match = re.match(pattern, paragraph.text.strip().lower(), re.IGNORECASE | re.DOTALL)
-        if content_match:
-            content = content_match.group("content")
-            return cls.extract_text(content)
+        if not content_match:
+            return
+        content = content_match.group("content")
+        return cls.extract_text(content)
 
     @classmethod
     def parse_action_match(cls, paragraph: bs4.Tag, match: re.Match, action_type: ActionTypes) -> dict | None:
@@ -77,35 +84,21 @@ class MotionContentExtractor:
                 return action
 
     @classmethod
-    def get_observations(cls, soup: bs4.BeautifulSoup, content: bs4.Tag) -> list[str]:
-        observations = [
-            cls.parse_content_paragraph(paragraph, cls.observation_pattern)
-            for paragraph in content.find_all("p")
-        ]
-        return [obs for obs in observations if obs]
-
-    @classmethod
-    def get_considerations(cls, soup: bs4.BeautifulSoup, content: bs4.Tag) -> list[str]:
-        considerations = [
-            cls.parse_content_paragraph(paragraph, cls.consideration_pattern)
-            for paragraph in content.find_all("p")
-        ]
-        return [con for con in considerations if con]
-
-    @classmethod
-    def get_opinions(cls, soup: bs4.BeautifulSoup, content: bs4.Tag) -> list[str]:
-        opinions = [
-            cls.parse_content_paragraph(paragraph, cls.opinion_pattern)
-            for paragraph in content.find_all("p")
-        ]
-        return [opn for opn in opinions if opn]
+    def get_premises(cls, soup: bs4.BeautifulSoup, content: bs4.Tag) -> list[tuple[str, str]]:
+        premises = []
+        for paragraph in content.find_all("p"):
+            if observation_text := cls.parse_content_paragraph(paragraph, cls.observation_pattern):
+                premises.append((PremiseTypes.OBSERVATION.value, observation_text,))
+            elif consideration_text := cls.parse_content_paragraph(paragraph, cls.consideration_pattern):
+                premises.append((PremiseTypes.CONSIDERATION.value, consideration_text,))
+            elif opinion_text := cls.parse_content_paragraph(paragraph, cls.opinion_pattern):
+                premises.append((PremiseTypes.OPINION.value, opinion_text,))
+        return premises
 
 
 MOTION_CONTENT_OBJECTIVE = {
     "@": MotionContentExtractor.get_motion_content,
     "#motion_id": MotionContentExtractor.get_motion_id,
     "action": MotionContentExtractor.get_action,
-    "observations": MotionContentExtractor.get_observations,
-    "considerations": MotionContentExtractor.get_considerations,
-    "opinions": MotionContentExtractor.get_opinions,
+    "premises": MotionContentExtractor.get_premises,
 }
