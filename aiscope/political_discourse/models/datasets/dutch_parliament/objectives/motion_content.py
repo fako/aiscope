@@ -1,17 +1,7 @@
-from enum import Enum
 import re
 import bs4
 
-
-class ActionTypes(Enum):
-    REQUEST = "request"
-    SUGGESTION = "suggestion"
-
-
-class PremiseTypes(Enum):
-    OBSERVATION = "observation"
-    CONSIDERATION = "consideration"
-    OPINION = "opinion"
+from political_discourse.models.datasets.dutch_parliament.constants import ActionTypes, PremiseTypes
 
 
 class MotionContentExtractor:
