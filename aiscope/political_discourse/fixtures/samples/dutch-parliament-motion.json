@@ -1,0 +1,64 @@
+{
+    "url": "https://zoek.officielebekendmakingen.nl/kst-32824-405.html",
+    "action": {
+        "text": "onderzoek te doen naar de volgende aspecten",
+        "type": "suggestion",
+        "points": [
+            "door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld",
+            "met welke actoren deze informatie vervolgens is gedeeld",
+            "wat er met deze persoonsgegevens is gedaan, of het is gebruikt voor besluiten en of er mogelijk gevolgen zijn geweest voor Nederlandse moslims door de registratie van hun persoonsgegevens"
+        ],
+        "audience": "de autoriteit persoonsgegevens"
+    },
+    "outcome": "approved",
+    "sitting": {
+        "url": "https://zoek.officielebekendmakingen.nl/h-tk-20232024-13-19.html",
+        "date": "2023-10-17",
+        "sitting": "13-19",
+        "political_body": "Tweede Kamer der Staten-Generaal",
+        "vote_record_id": "h-tk-20232024-13-19",
+        "parliamentary_session": "2023-2024"
+    },
+    "premises": [
+        [
+            "observation",
+            "er gegevens zijn verzameld over de nederlandse moslimgemeenschap zonder wettelijke grondslag"
+        ],
+        [
+            "consideration",
+            "dit is gedaan door onderdelen van de nederlandse overheid, waar verschillende ministeries en organisaties deel van uitmaken, zoals de taskforce problematisch gedrag, zodat persoonsgegevens op meerdere plekken zouden kunnen zijn opgeslagen"
+        ],
+        [
+            "consideration",
+            "persoonsgegevens ook zijn gedeeld met gemeenten, de politie, ministeries en veiligheidspartners door de leden van de taskforce problematisch gedrag"
+        ],
+        [
+            "opinion",
+            "voorkomen dient te worden dat persoonsgegevens van nederlandse moslims nog ergens rondslingeren of dat de gegevens nog worden gebruikt"
+        ]
+    ],
+    "approvals": [
+        "SP",
+        "GroenLinks",
+        "BIJ1",
+        "Volt",
+        "DENK",
+        "PvdA",
+        "PvdD",
+        "D66",
+        "Lid Omtzigt",
+        "ChristenUnie",
+        "SGP",
+        "CDA"
+    ],
+    "motion_id": "kst-32824-405",
+    "rejections": [
+        "Lid Ephraim",
+        "VVD",
+        "JA21",
+        "Groep Van Haga",
+        "PVV",
+        "FVD",
+        "BBB"
+    ]
+}
