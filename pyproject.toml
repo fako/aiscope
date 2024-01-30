@@ -21,6 +21,7 @@ invoke = "^2.2.0"
 pytest-django = "^4.7.0"
 flake8 = "^7.0.0"
 ipdb = "^0.13.13"
+tiktoken = "^0.5.2"
 
 
 [tool.pytest.ini_options]
