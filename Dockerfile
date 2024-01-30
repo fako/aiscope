@@ -3,7 +3,7 @@ SHELL ["/bin/bash", "-c"]
 ARG UID=1000
 ARG GID=1000
 
-RUN apt-get update && apt-get install -y less vim build-essential gettext libpq-dev
+RUN apt-get update && apt-get install -y less vim git build-essential gettext libpq-dev
 
 # Create the app environment
 RUN mkdir -p /usr/src/app
@@ -29,7 +29,7 @@ USER app:app
 RUN pip install --no-cache-dir --user poetry
 COPY pyproject.toml /usr/src/app/
 COPY poetry.lock /usr/src/app/
-RUN poetry export --format requirements.txt --output requirements.txt
+RUN poetry export --format requirements.txt --output requirements.txt --without-hashes
 RUN pip install --user -r requirements.txt
 
 # Copy application
