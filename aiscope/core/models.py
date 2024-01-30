@@ -1,0 +1,1 @@
+from core.openai.resources.embeddings import OpenaiEmbeddingsResource
