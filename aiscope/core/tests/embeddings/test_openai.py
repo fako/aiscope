@@ -2,13 +2,18 @@ from unittest.mock import patch
 
 from django.test import TestCase
 
+from datagrowth.resources.testing import ResourceFixturesMixin
+
 from core.openai.resources.embeddings import OpenaiEmbeddingsResource
 
 
-class TestOpenAIEmbeddingsResource(TestCase):
+class TestOpenAIEmbeddingsResource(ResourceFixturesMixin, TestCase):
+
+    resource_fixtures = ["embeddings"]
 
     @classmethod
     def setUpTestData(cls):
+        super().setUpTestData()
         cls.prepared_test_motion = {
             "3834e95ca98a5d7ebf6fc21dfcb24c878ce1efc4":
                 "door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld",
@@ -179,3 +184,22 @@ class TestOpenAIEmbeddingsResource(TestCase):
             ]
         ]
         self.assert_embeddings_request(rsc.request, expected_payloads, 0)
+
+    def test_content(self):
+        resource = OpenaiEmbeddingsResource.objects.get(id=1)
+        content_type, data = resource.content
+        self.assertEqual(content_type, "application/json")
+        self.assertIsInstance(data, dict)
+        self.assertEqual(sorted(list(data.keys())), [
+            "9b13c63b7b094aaa70f5010b3426015975835e43",
+            "fa26be19de6bff93f70bc2308434e4a440bbad02"
+        ], "Expected hashed texts as keys for content output")
+        for key, embeddings in data.items():
+            self.assertIsInstance(embeddings, list)
+            self.assertEqual(len(embeddings), 1536, "Expected content values to contain embeddings")
+
+    def test_empty_content(self):
+        resource = OpenaiEmbeddingsResource()
+        content_type, data = resource.content
+        self.assertIsNone(content_type)
+        self.assertIsNone(data)

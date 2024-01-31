@@ -1,0 +1,83 @@
+[
+    {
+        "model": "core.openaiembeddingsresource",
+        "pk": 1,
+        "fields": {
+            "uri": "api.openai.com/v1/embeddings",
+            "status": 200,
+            "config": "{\"_namespace\": \"global\", \"_private\": [\"_private\", \"_defaults\", \"_namespace\"]}",
+            "created_at": "2024-01-31T10:24:49.935Z",
+            "modified_at": "2024-01-31T10:40:45.448Z",
+            "purge_at": null,
+            "retainer_type": null,
+            "retainer_id": null,
+            "data_hash": "ad8e38ba9c9e07dd341e6595c865da45662328da",
+            "request": {
+                "url": "https://api.openai.com/v1/embeddings",
+                "args": [
+                    {
+                        "9b13c63b7b094aaa70f5010b3426015975835e43": "with two texts",
+                        "fa26be19de6bff93f70bc2308434e4a440bbad02": "this is a test"
+                    }
+                ],
+                "json": {
+                    "input": [
+                        "this is a test",
+                        "with two texts"
+                    ],
+                    "model": "text-embedding-ada-002",
+                    "encoding_format": "float"
+                },
+                "kwargs": {},
+                "method": "post",
+                "headers": {
+                    "Accept": "*/*",
+                    "Connection": "keep-alive",
+                    "User-Agent": "DataGrowth (v0.20.2); python-requests/2.31.0",
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer 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",
+                    "Accept-Encoding": "gzip, deflate"
+                },
+                "payloads": [
+                    [
+                        [
+                            "fa26be19de6bff93f70bc2308434e4a440bbad02",
+                            "this is a test"
+                        ],
+                        [
+                            "9b13c63b7b094aaa70f5010b3426015975835e43",
+                            "with two texts"
+                        ]
+                    ]
+                ],
+                "backoff_delay": false,
+                "payload_index": 0
+            },
+            "head": {
+                "date": "Wed, 31 Jan 2024 10:24:36 GMT",
+                "cf-ray": "84e13ef32e6e0bdb-AMS",
+                "server": "cloudflare",
+                "alt-svc": "h3=\":443\"; ma=86400",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "openai-model": "text-embedding-ada-002",
+                "x-request-id": "3ed48ee9add48620b8f0718e9307bc21",
+                "openai-version": "2020-10-01",
+                "cf-cache-status": "DYNAMIC",
+                "content-encoding": "gzip",
+                "transfer-encoding": "chunked",
+                "openai-organization": "datascope-search",
+                "openai-processing-ms": "22",
+                "x-ratelimit-limit-tokens": "5000000",
+                "x-ratelimit-reset-tokens": "0s",
+                "strict-transport-security": "max-age=15724800; includeSubDomains",
+                "x-ratelimit-limit-requests": "10000",
+                "x-ratelimit-reset-requests": "6ms",
+                "access-control-allow-origin": "*",
+                "x-ratelimit-remaining-tokens": "4999993",
+                "x-ratelimit-remaining-requests": "9999"
+            },
+            "body": "openai-embeddings.01.json"
+        }
+    }
+]

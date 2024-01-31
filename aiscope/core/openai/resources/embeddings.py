@@ -18,7 +18,6 @@ class OpenaiEmbeddingsResource(HttpResource):
     }
 
     # TODO: next request based on token count: https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken
-    # TODO: content should return sha1 keys and embedding values
 
     def auth_headers(self):
         return {
@@ -89,3 +88,16 @@ class OpenaiEmbeddingsResource(HttpResource):
         request["payload_index"] = 0
         request["json"]["input"] = self.text_payload_to_data(payloads[0])
         return request
+
+    @property
+    def content(self):
+        content_type, data = super().content
+        if not data:
+            return content_type, data
+        raw_embeddings = data["data"]
+        payload = self.request["payloads"][self.request["payload_index"]]
+        embeddings = {
+            text_info[0]: embedding["embedding"]
+            for text_info, embedding in zip(payload, raw_embeddings)
+        }
+        return content_type, embeddings
