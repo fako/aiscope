@@ -1,7 +1,7 @@
 import re
 import bs4
 
-from political_discourse.models.datasets.dutch_parliament.constants import ActionTypes, PremiseTypes
+from dutch_parliament.constants import ActionTypes, PremiseTypes
 
 
 class MotionContentExtractor:

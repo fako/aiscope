@@ -1,0 +1,1 @@
+from dutch_parliament.tasks.motions import get_claim_texts

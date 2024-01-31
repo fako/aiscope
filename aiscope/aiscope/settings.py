@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'datagrowth',
     'core',
 
-    'political_discourse'
+    'dutch_parliament',
 ]
 
 MIDDLEWARE = [

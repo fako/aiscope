@@ -4,12 +4,8 @@ from datagrowth.configuration import create_config
 from datagrowth.processors import ExtractProcessor
 from datagrowth.resources.testing import ResourceFixturesMixin
 
-from political_discourse.models import DutchParlementRecordSearch, DutchParlementRecord
-from political_discourse.models.datasets.dutch_parliament.objectives import (
-    VOTE_RECORDS_OBJECTIVE,
-    MOTION_VOTES_OBJECTIVE,
-    MOTION_CONTENT_OBJECTIVE
-)
+from dutch_parliament.models import DutchParlementRecordSearch, DutchParlementRecord
+from dutch_parliament.objectives import VOTE_RECORDS_OBJECTIVE, MOTION_VOTES_OBJECTIVE, MOTION_CONTENT_OBJECTIVE
 
 
 class TestVoteRecordsExtraction(ResourceFixturesMixin, TestCase):

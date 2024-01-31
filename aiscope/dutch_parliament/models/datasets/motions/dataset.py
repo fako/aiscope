@@ -1,30 +1,17 @@
 from datetime import datetime
 
 from django.utils.timezone import make_aware
-from django.contrib.contenttypes.fields import GenericRelation
 
 from datagrowth.datatypes import DatasetBase
 from datagrowth.datatypes.datasets.constants import GrowthStrategy
 
-from political_discourse.models.datasets.dutch_parliament.objectives import (
-    VOTE_RECORDS_OBJECTIVE,
-    MOTION_VOTES_OBJECTIVE,
-    MOTION_CONTENT_OBJECTIVE
-)
+from dutch_parliament.objectives import VOTE_RECORDS_OBJECTIVE, MOTION_VOTES_OBJECTIVE, MOTION_CONTENT_OBJECTIVE
 
 
 class DutchParliamentMotionsDataset(DatasetBase):
 
-    versions = GenericRelation(
-        "MotionDatasetVersion",
-        content_type_field="dataset_type",
-        object_id_field="dataset_id",
-        related_query_name="datasets"
-    )
-
     GROWTH_STRATEGY = GrowthStrategy.STACK
 
-    DATASET_VERSION_MODEL = "MotionDatasetVersion"
     COLLECTION_IDENTIFIER = "motion_id"
     SEEDING_PHASES = [
         {
@@ -32,7 +19,7 @@ class DutchParliamentMotionsDataset(DatasetBase):
             "strategy": "initial",
             "batch_size": 5,
             "retrieve_data": {
-                "resource": "political_discourse.DutchParlementRecordSearch",
+                "resource": "dutch_parliament.DutchParlementRecordSearch",
                 "method": "get",
                 "args": [],
                 "kwargs": {},
@@ -49,7 +36,7 @@ class DutchParliamentMotionsDataset(DatasetBase):
             "strategy": "merge",
             "batch_size": 5,
             "retrieve_data": {
-                "resource": "political_discourse.DutchParlementRecord",
+                "resource": "dutch_parliament.DutchParlementRecord",
                 "method": "get",
                 "args": ["$.url"],  # will be the sitting url
                 "kwargs": {},
@@ -66,7 +53,7 @@ class DutchParliamentMotionsDataset(DatasetBase):
             "strategy": "merge",
             "batch_size": 5,
             "retrieve_data": {
-                "resource": "political_discourse.DutchParlementRecord",
+                "resource": "dutch_parliament.DutchParlementRecord",
                 "method": "get",
                 "args": ["$.url"],  # will be the motion url
                 "kwargs": {},

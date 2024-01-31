@@ -1,3 +1,0 @@
-from political_discourse.models.datasets.dutch_parliament.objectives.vote_records import VOTE_RECORDS_OBJECTIVE
-from political_discourse.models.datasets.dutch_parliament.objectives.motion_votes import MOTION_VOTES_OBJECTIVE
-from political_discourse.models.datasets.dutch_parliament.objectives.motion_content import MOTION_CONTENT_OBJECTIVE

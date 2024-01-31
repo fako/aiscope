@@ -1,6 +1,6 @@
 [
     {
-        "model": "political_discourse.dutchparlementrecordsearch",
+        "model": "dutch_parliament.dutchparlementrecordsearch",
         "pk": 1,
         "fields": {
             "uri": "zoek.officielebekendmakingen.nl/resultaten?col=AlleParlementaireDocumenten&pg=50&q=%28c.product-area%3D%3D%22officielepublicaties%22%29and%28%28dt.creator%3D%3D%22Tweede+Kamer+der+Staten-Generaal%22%29or%28dt.creator%3D%3D%22Tweede+Kamer+OCV+%2F+UCV%22%29%29and%28w.publicatienaam%3D%3D%22Handelingen%22%29and%28dt.subject%3D%22Migratie+en+integratie%22%29and%28dt.date%3E%3D%222006-01-01%22+and+dt.date%3C%3D%222023-12-01%22%29&sf=ru%7CHandeling&svel=Kenmerkendedatum&svol=Aflopend",
@@ -54,7 +54,7 @@
         }
     },
     {
-        "model": "political_discourse.dutchparlementrecordsearch",
+        "model": "dutch_parliament.dutchparlementrecordsearch",
         "pk": 2,
         "fields": {
             "uri": "zoek.officielebekendmakingen.nl/resultaten?col=AlleParlementaireDocumenten&pagina=16&pg=50&q=%28c.product-area%3D%3D%22officielepublicaties%22%29and%28%28dt.creator%3D%3D%22Tweede+Kamer+der+Staten-Generaal%22%29or%28dt.creator%3D%3D%22Tweede+Kamer+OCV+%2F+UCV%22%29%29and%28w.publicatienaam%3D%3D%22Handelingen%22%29and%28dt.subject%3D%22Migratie+en+integratie%22%29and%28dt.date%3E%3D%222006-01-01%22+and+dt.date%3C%3D%222023-12-01%22%29&sf=ru%7CHandeling&svel=Kenmerkendedatum&svol=Aflopend",
@@ -108,7 +108,7 @@
         }
     },
     {
-        "model": "political_discourse.dutchparlementrecord",
+        "model": "dutch_parliament.dutchparlementrecord",
         "pk": 1,
         "fields": {
             "uri": "zoek.officielebekendmakingen.nl/h-tk-20232024-13-19.html",
@@ -162,7 +162,7 @@
         }
     },
     {
-        "model": "political_discourse.dutchparlementrecord",
+        "model": "dutch_parliament.dutchparlementrecord",
         "pk": 2,
         "fields": {
             "uri": "zoek.officielebekendmakingen.nl/h-tk-20052006-3563-3563.html",
@@ -216,7 +216,7 @@
         }
     },
     {
-        "model": "political_discourse.dutchparlementrecord",
+        "model": "dutch_parliament.dutchparlementrecord",
         "pk": 3,
         "fields": {
             "uri": "zoek.officielebekendmakingen.nl/h-tk-20232024-10-8.html",
@@ -270,7 +270,7 @@
         }
     },
     {
-        "model": "political_discourse.dutchparlementrecord",
+        "model": "dutch_parliament.dutchparlementrecord",
         "pk": 4,
         "fields": {
             "uri": "zoek.officielebekendmakingen.nl/kst-19637-1020.html",
@@ -325,7 +325,7 @@
         }
     },
     {
-        "model": "political_discourse.dutchparlementrecord",
+        "model": "dutch_parliament.dutchparlementrecord",
         "pk": 5,
         "fields": {
             "uri": "zoek.officielebekendmakingen.nl/kst-32824-405.html",

@@ -1,41 +1,22 @@
 from hashlib import sha1
-from django.db import models
 
 from datagrowth.datatypes import DatasetVersionBase, CollectionBase, DocumentBase
 
-from political_discourse.models.datasets.dutch_parliament.constants import PremiseTypes, ActionTypes
+from dutch_parliament.constants import PremiseTypes, ActionTypes
 
 
-class MotionDatastorageMixin:
-    DATASET_VERSION_MODEL = "MotionDatasetVersion"
-    COLLECTION_MODEL = "MotionCollection"
-    DOCUMENT_MODEL = "MotionDocument"
+class DatasetVersion(DatasetVersionBase):
+    pass
 
 
-class MotionDatasetVersion(MotionDatastorageMixin, DatasetVersionBase):
-
-    @property
-    def collections(self):
-        return self.motioncollection_set
+class Collection(CollectionBase):
 
     @property
     def documents(self):
-        return self.motiondocument_set
+        return self.document_set
 
 
-class MotionCollection(MotionDatastorageMixin, CollectionBase):
-
-    dataset_version = models.ForeignKey(MotionDatasetVersion, null=True, blank=True, on_delete=models.CASCADE)
-
-    @property
-    def documents(self):
-        return self.motiondocument_set
-
-
-class MotionDocument(MotionDatastorageMixin, DocumentBase):
-
-    dataset_version = models.ForeignKey(MotionDatasetVersion, null=True, blank=True, on_delete=models.CASCADE)
-    collection = models.ForeignKey(MotionCollection, blank=True, null=True, on_delete=models.CASCADE)
+class Document(DocumentBase):
 
     def get_motion_argument_text(self) -> str | None:
         if not (action := self.properties.get("action")) or not (premises := self.properties.get("premises")):
