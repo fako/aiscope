@@ -145,3 +145,9 @@ CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
 CELERY_WORKER_HIJACK_ROOT_LOGGER = True  # probable not in the cloud though ...
 CELERY_WORKER_MAX_TASKS_PER_CHILD = 50
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+
+# Openai
+# https://platform.openai.com/docs/introduction
+
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", None)

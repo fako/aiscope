@@ -17,17 +17,21 @@ class OpenaiEmbeddingsResource(HttpResource):
         "Content-Type": "application/json"
     }
 
-    # TODO: bearer authentication
     # TODO: next request based on token count: https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken
     # TODO: content should return sha1 keys and embedding values
+
+    def auth_headers(self):
+        return {
+            "Authorization": f"Bearer {self.config.openai_api_key}"
+        }
 
     def validate_input(self, method, *args, **kwargs):
         if method != "post":
             raise ValidationError("EmbeddingsResource only supports POST method")
         if not len(args) == 1:
-            raise ValidationError("EmbeddingsResource only expects a single argument")
+            raise ValidationError("EmbeddingsResource expects texts as a single argument")
         if not isinstance(args[0], dict):
-            raise ValidationError("EmbeddingsResource expected a dict as input")
+            raise ValidationError("EmbeddingsResource expected texts as a dict where the keys are hashes of the texts")
         if kwargs:
             raise ValidationError("EmbeddingsResource didn't expect kwargs")
 
