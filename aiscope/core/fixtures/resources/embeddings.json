@@ -79,5 +79,224 @@
             },
             "body": "openai-embeddings.01.json"
         }
+    },
+    {
+        "model": "core.openaiembeddingsresource",
+        "pk": 2,
+        "fields": {
+            "uri": "api.openai.com/v1/embeddings",
+            "status": 200,
+            "config": "{\"_namespace\": \"global\", \"_private\": [\"_private\", \"_defaults\", \"_namespace\"], \"note\": \"MODEL_MAX_TOKENS=150\"}",
+            "created_at": "2024-01-31T11:14:19.049Z",
+            "modified_at": "2024-01-31T11:14:19.049Z",
+            "purge_at": null,
+            "retainer_type": null,
+            "retainer_id": null,
+            "data_hash": "24a36ad1dc8942641f2601375f7b5cfc5a073b26",
+            "request": {
+                "url": "https://api.openai.com/v1/embeddings",
+                "args": [
+                    {
+                        "3834e95ca98a5d7ebf6fc21dfcb24c878ce1efc4": "door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld",
+                        "3b7fbbe07c209a45dd9c408edb0f2671de530c54": "met welke actoren deze informatie vervolgens is gedeeld",
+                        "42963196ba7f699b642bf8575ceb4b7ee7c49f0e": "wat er met deze persoonsgegevens is gedaan, of het is gebruikt voor besluiten en of er mogelijk gevolgen zijn geweest voor Nederlandse moslims door de registratie van hun persoonsgegevens",
+                        "7092ef9e230d30f6934509b281d426fd6dfceefe": "voorkomen dient te worden dat persoonsgegevens van nederlandse moslims nog ergens rondslingeren of dat de gegevens nog worden gebruikt",
+                        "82815ed3055b7725134631454d26008eb10c2fa9": "persoonsgegevens ook zijn gedeeld met gemeenten, de politie, ministeries en veiligheidspartners door de leden van de taskforce problematisch gedrag",
+                        "984593ef9f11fa9989bf6bba8c495701a774071e": "dit is gedaan door onderdelen van de nederlandse overheid, waar verschillende ministeries en organisaties deel van uitmaken, zoals de taskforce problematisch gedrag, zodat persoonsgegevens op meerdere plekken zouden kunnen zijn opgeslagen",
+                        "e7c1023668ea4f7fa15259e58caf34defe2faca2": "er gegevens zijn verzameld over de nederlandse moslimgemeenschap zonder wettelijke grondslag"
+                    }
+                ],
+                "json": {
+                    "input": [
+                        "dit is gedaan door onderdelen van de nederlandse overheid, waar verschillende ministeries en organisaties deel van uitmaken, zoals de taskforce problematisch gedrag, zodat persoonsgegevens op meerdere plekken zouden kunnen zijn opgeslagen",
+                        "wat er met deze persoonsgegevens is gedaan, of het is gebruikt voor besluiten en of er mogelijk gevolgen zijn geweest voor Nederlandse moslims door de registratie van hun persoonsgegevens",
+                        "voorkomen dient te worden dat persoonsgegevens van nederlandse moslims nog ergens rondslingeren of dat de gegevens nog worden gebruikt"
+                    ],
+                    "model": "text-embedding-ada-002",
+                    "encoding_format": "float"
+                },
+                "kwargs": {},
+                "method": "post",
+                "headers": {
+                    "Accept": "*/*",
+                    "Connection": "keep-alive",
+                    "User-Agent": "DataGrowth (v0.20.2); python-requests/2.31.0",
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer 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",
+                    "Accept-Encoding": "gzip, deflate"
+                },
+                "payloads": [
+                    [
+                        [
+                            "984593ef9f11fa9989bf6bba8c495701a774071e",
+                            "dit is gedaan door onderdelen van de nederlandse overheid, waar verschillende ministeries en organisaties deel van uitmaken, zoals de taskforce problematisch gedrag, zodat persoonsgegevens op meerdere plekken zouden kunnen zijn opgeslagen"
+                        ],
+                        [
+                            "42963196ba7f699b642bf8575ceb4b7ee7c49f0e",
+                            "wat er met deze persoonsgegevens is gedaan, of het is gebruikt voor besluiten en of er mogelijk gevolgen zijn geweest voor Nederlandse moslims door de registratie van hun persoonsgegevens"
+                        ],
+                        [
+                            "7092ef9e230d30f6934509b281d426fd6dfceefe",
+                            "voorkomen dient te worden dat persoonsgegevens van nederlandse moslims nog ergens rondslingeren of dat de gegevens nog worden gebruikt"
+                        ]
+                    ],
+                    [
+                        [
+                            "82815ed3055b7725134631454d26008eb10c2fa9",
+                            "persoonsgegevens ook zijn gedeeld met gemeenten, de politie, ministeries en veiligheidspartners door de leden van de taskforce problematisch gedrag"
+                        ],
+                        [
+                            "e7c1023668ea4f7fa15259e58caf34defe2faca2",
+                            "er gegevens zijn verzameld over de nederlandse moslimgemeenschap zonder wettelijke grondslag"
+                        ],
+                        [
+                            "3834e95ca98a5d7ebf6fc21dfcb24c878ce1efc4",
+                            "door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld"
+                        ],
+                        [
+                            "3b7fbbe07c209a45dd9c408edb0f2671de530c54",
+                            "met welke actoren deze informatie vervolgens is gedeeld"
+                        ]
+                    ]
+                ],
+                "backoff_delay": false,
+                "payload_index": 0
+            },
+            "head": {
+                "date": "Wed, 31 Jan 2024 11:12:50 GMT",
+                "cf-ray": "84e18597ffed66e4-AMS",
+                "server": "cloudflare",
+                "alt-svc": "h3=\":443\"; ma=86400",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "openai-model": "text-embedding-ada-002",
+                "x-request-id": "abac6ba99d411a17342b94f9d90aac30",
+                "openai-version": "2020-10-01",
+                "cf-cache-status": "DYNAMIC",
+                "content-encoding": "gzip",
+                "transfer-encoding": "chunked",
+                "openai-organization": "datascope-search",
+                "openai-processing-ms": "25",
+                "x-ratelimit-limit-tokens": "5000000",
+                "x-ratelimit-reset-tokens": "1ms",
+                "strict-transport-security": "max-age=15724800; includeSubDomains",
+                "x-ratelimit-limit-requests": "10000",
+                "x-ratelimit-reset-requests": "6ms",
+                "access-control-allow-origin": "*",
+                "x-ratelimit-remaining-tokens": "4999861",
+                "x-ratelimit-remaining-requests": "9999"
+            },
+            "body": "openai-embeddings.02.json"
+        }
+    },
+    {
+        "model": "core.openaiembeddingsresource",
+        "pk": 3,
+        "fields": {
+            "uri": "api.openai.com/v1/embeddings",
+            "status": 200,
+            "config": "{\"_namespace\": \"global\", \"_private\": [\"_private\", \"_defaults\", \"_namespace\"], \"note\": \"MODEL_MAX_TOKENS=150\"}",
+            "created_at": "2024-01-31T11:30:23.076Z",
+            "modified_at": "2024-01-31T11:30:23.076Z",
+            "purge_at": null,
+            "retainer_type": null,
+            "retainer_id": null,
+            "data_hash": "78e2b3384194e5c42999d295ca276b7114e4516d",
+            "request": {
+                "url": "https://api.openai.com/v1/embeddings",
+                "args": [
+                    {
+                        "3834e95ca98a5d7ebf6fc21dfcb24c878ce1efc4": "door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld",
+                        "3b7fbbe07c209a45dd9c408edb0f2671de530c54": "met welke actoren deze informatie vervolgens is gedeeld",
+                        "42963196ba7f699b642bf8575ceb4b7ee7c49f0e": "wat er met deze persoonsgegevens is gedaan, of het is gebruikt voor besluiten en of er mogelijk gevolgen zijn geweest voor Nederlandse moslims door de registratie van hun persoonsgegevens",
+                        "7092ef9e230d30f6934509b281d426fd6dfceefe": "voorkomen dient te worden dat persoonsgegevens van nederlandse moslims nog ergens rondslingeren of dat de gegevens nog worden gebruikt",
+                        "82815ed3055b7725134631454d26008eb10c2fa9": "persoonsgegevens ook zijn gedeeld met gemeenten, de politie, ministeries en veiligheidspartners door de leden van de taskforce problematisch gedrag",
+                        "984593ef9f11fa9989bf6bba8c495701a774071e": "dit is gedaan door onderdelen van de nederlandse overheid, waar verschillende ministeries en organisaties deel van uitmaken, zoals de taskforce problematisch gedrag, zodat persoonsgegevens op meerdere plekken zouden kunnen zijn opgeslagen",
+                        "e7c1023668ea4f7fa15259e58caf34defe2faca2": "er gegevens zijn verzameld over de nederlandse moslimgemeenschap zonder wettelijke grondslag"
+                    }
+                ],
+                "json": {
+                    "input": [
+                        "persoonsgegevens ook zijn gedeeld met gemeenten, de politie, ministeries en veiligheidspartners door de leden van de taskforce problematisch gedrag",
+                        "er gegevens zijn verzameld over de nederlandse moslimgemeenschap zonder wettelijke grondslag",
+                        "door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld",
+                        "met welke actoren deze informatie vervolgens is gedeeld"
+                    ],
+                    "model": "text-embedding-ada-002",
+                    "encoding_format": "float"
+                },
+                "kwargs": {},
+                "method": "post",
+                "headers": {
+                    "Accept": "*/*",
+                    "Connection": "keep-alive",
+                    "User-Agent": "DataGrowth (v0.20.2); python-requests/2.31.0",
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer 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",
+                    "Accept-Encoding": "gzip, deflate"
+                },
+                "payloads": [
+                    [
+                        [
+                            "984593ef9f11fa9989bf6bba8c495701a774071e",
+                            "dit is gedaan door onderdelen van de nederlandse overheid, waar verschillende ministeries en organisaties deel van uitmaken, zoals de taskforce problematisch gedrag, zodat persoonsgegevens op meerdere plekken zouden kunnen zijn opgeslagen"
+                        ],
+                        [
+                            "42963196ba7f699b642bf8575ceb4b7ee7c49f0e",
+                            "wat er met deze persoonsgegevens is gedaan, of het is gebruikt voor besluiten en of er mogelijk gevolgen zijn geweest voor Nederlandse moslims door de registratie van hun persoonsgegevens"
+                        ],
+                        [
+                            "7092ef9e230d30f6934509b281d426fd6dfceefe",
+                            "voorkomen dient te worden dat persoonsgegevens van nederlandse moslims nog ergens rondslingeren of dat de gegevens nog worden gebruikt"
+                        ]
+                    ],
+                    [
+                        [
+                            "82815ed3055b7725134631454d26008eb10c2fa9",
+                            "persoonsgegevens ook zijn gedeeld met gemeenten, de politie, ministeries en veiligheidspartners door de leden van de taskforce problematisch gedrag"
+                        ],
+                        [
+                            "e7c1023668ea4f7fa15259e58caf34defe2faca2",
+                            "er gegevens zijn verzameld over de nederlandse moslimgemeenschap zonder wettelijke grondslag"
+                        ],
+                        [
+                            "3834e95ca98a5d7ebf6fc21dfcb24c878ce1efc4",
+                            "door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld"
+                        ],
+                        [
+                            "3b7fbbe07c209a45dd9c408edb0f2671de530c54",
+                            "met welke actoren deze informatie vervolgens is gedeeld"
+                        ]
+                    ]
+                ],
+                "backoff_delay": false,
+                "payload_index": 1
+            },
+            "head": {
+                "date": "Wed, 31 Jan 2024 11:28:48 GMT",
+                "cf-ray": "84e19cfcee6b6664-AMS",
+                "server": "cloudflare",
+                "alt-svc": "h3=\":443\"; ma=86400",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "openai-model": "text-embedding-ada-002",
+                "x-request-id": "5c997562211652f90950b6900371a614",
+                "openai-version": "2020-10-01",
+                "cf-cache-status": "DYNAMIC",
+                "content-encoding": "gzip",
+                "transfer-encoding": "chunked",
+                "openai-organization": "datascope-search",
+                "openai-processing-ms": "22",
+                "x-ratelimit-limit-tokens": "5000000",
+                "x-ratelimit-reset-tokens": "1ms",
+                "strict-transport-security": "max-age=15724800; includeSubDomains",
+                "x-ratelimit-limit-requests": "10000",
+                "x-ratelimit-reset-requests": "6ms",
+                "access-control-allow-origin": "*",
+                "x-ratelimit-remaining-tokens": "4999907",
+                "x-ratelimit-remaining-requests": "9999"
+            },
+            "body": "openai-embeddings.03.json"
+        }
     }
 ]

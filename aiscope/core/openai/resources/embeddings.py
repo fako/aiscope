@@ -1,6 +1,7 @@
 from hashlib import sha1
 import tiktoken
 from operator import itemgetter
+from copy import deepcopy
 
 from django.core.exceptions import ValidationError
 
@@ -16,8 +17,6 @@ class OpenaiEmbeddingsResource(HttpResource):
     HEADERS = {
         "Content-Type": "application/json"
     }
-
-    # TODO: next request based on token count: https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken
 
     def auth_headers(self):
         return {
@@ -88,6 +87,17 @@ class OpenaiEmbeddingsResource(HttpResource):
         request["payload_index"] = 0
         request["json"]["input"] = self.text_payload_to_data(payloads[0])
         return request
+
+    def create_next_request(self):
+        if not self.request:
+            return None
+        if len(self.request["payloads"]) <= self.request["payload_index"] + 1:
+            return None
+        next_request = deepcopy(self.request)
+        payload_index = next_request["payload_index"] + 1
+        next_request["payload_index"] = payload_index
+        next_request["json"]["input"] = self.text_payload_to_data(next_request["payloads"][payload_index])
+        return next_request
 
     @property
     def content(self):

@@ -203,3 +203,25 @@ class TestOpenAIEmbeddingsResource(ResourceFixturesMixin, TestCase):
         content_type, data = resource.content
         self.assertIsNone(content_type)
         self.assertIsNone(data)
+
+    def test_create_next_request(self):
+        resource = OpenaiEmbeddingsResource.objects.get(id=2)
+        request = resource.create_next_request()
+        self.assertIsInstance(request, dict)
+        self.assertEqual(request["payload_index"], 1)
+        self.assertNotEqual(
+            request["json"]["input"], resource.request["json"]["input"],
+            "Expected create_next_request to update input texts"
+        )
+        self.assertEqual(request["json"]["input"], [
+            "persoonsgegevens ook zijn gedeeld met gemeenten, de politie, ministeries en veiligheidspartners door "
+            "de leden van de taskforce problematisch gedrag",
+            "er gegevens zijn verzameld over de nederlandse moslimgemeenschap zonder wettelijke grondslag",
+            "door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld",
+            "met welke actoren deze informatie vervolgens is gedeeld"
+        ])
+
+    def test_create_next_request_end(self):
+        resource = OpenaiEmbeddingsResource.objects.get(id=3)
+        request = resource.create_next_request()
+        self.assertIsNone(request)
