@@ -2,11 +2,11 @@ from django.contrib import admin
 
 from datagrowth.admin import DataStorageAdmin, DocumentAdmin, HttpResourceAdmin
 
-from dutch_parliament.models import (DutchParliamentMotionsDataset, DatasetVersion, Collection, Document,
+from dutch_parliament.models import (MotionsDataset, DatasetVersion, Collection, Document,
                                      DutchParlementRecordSearch, DutchParlementRecord)
 
 
-admin.site.register(DutchParliamentMotionsDataset, DataStorageAdmin)
+admin.site.register(MotionsDataset, DataStorageAdmin)
 
 admin.site.register(DatasetVersion, DataStorageAdmin)
 admin.site.register(Collection, DataStorageAdmin)

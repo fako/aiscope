@@ -8,7 +8,7 @@ from datagrowth.datatypes.datasets.constants import GrowthStrategy
 from dutch_parliament.objectives import VOTE_RECORDS_OBJECTIVE, MOTION_VOTES_OBJECTIVE, MOTION_CONTENT_OBJECTIVE
 
 
-class DutchParliamentMotionsDataset(DatasetBase):
+class MotionsDataset(DatasetBase):
 
     GROWTH_STRATEGY = GrowthStrategy.STACK
 
