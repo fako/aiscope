@@ -60,3 +60,7 @@ class Document(DocumentBase):
             texts[key] = point
 
         return texts
+
+    @property
+    def has_claim_texts(self) -> bool:
+        return bool(self.derivatives.get("dutch_parliament.get_claim_texts"))

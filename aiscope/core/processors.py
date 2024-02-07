@@ -1,0 +1,1 @@
+from core.openai.processors.growth.embeddings import EmbeddingsGrowthProcessor

@@ -68,6 +68,11 @@ class MotionsDataset(DatasetBase):
             "depends_on": ["$.action", "$.premises"],
             "resources": [],
             "checks": []
+        },
+        "core.get_embeddings": {
+            "depends_on": ["dutch_parliament.get_claim_texts"],
+            "resources": ["core.openaiembeddingsresource"],
+            "checks": ["has_claim_texts"]
         }
     }
 

@@ -13,6 +13,6 @@ def get_claim_texts(label: str, document_ids: List[int]):
     storages = DataStorages.from_label(label)
     for document in storages.Document.objects.filter(id__in=document_ids).select_for_update():
         texts = document.get_claim_texts()
-        document.derivatives["dutch_parliament.get_claim_texts"] = texts
+        document.derivatives["dutch_parliament.get_claim_texts"] = {"texts": texts}
         document.task_results["dutch_parliament.get_claim_texts"] = {"success": bool(texts)}
         document.save()
