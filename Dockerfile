@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y less vim git build-essential gettext li
 # Create the app environment
 RUN mkdir -p /usr/src/app
 RUN mkdir -p /usr/src/static
+RUN mkdir -p /usr/src/datagrowth
 WORKDIR /usr/src/app
 
 # Adding an app user to prevent container access as root
@@ -21,6 +22,7 @@ ENV PYTHONPATH="/usr/src/app"
 # Give access to app user
 RUN chown -R app:app /usr/src/app
 RUN chown -R app:app /usr/src/static
+RUN chown -R app:app /usr/src/datagrowth
 
 # Become app user to prevent attacks during install (possibly from hijacked PyPi packages)
 USER app:app
