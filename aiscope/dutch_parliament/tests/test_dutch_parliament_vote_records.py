@@ -289,3 +289,24 @@ class TestMotionRecordsExtraction(ResourceFixturesMixin, TestCase):
                 )
             ]
         })
+
+    def test_no_premises(self):
+        # Setup extraction
+        config = create_config("global", {
+            "objective": MOTION_CONTENT_OBJECTIVE
+        })
+        extractor = ExtractProcessor(config=config)
+        resource = DutchParlementRecord.objects.get(uri="zoek.officielebekendmakingen.nl/kst-36333-48.html")
+        # Extract content and assert
+        content = list(extractor.extract_from_resource(resource))
+        self.assertEqual(content[0], {
+            "motion_id": "kst-36333-48",
+            "action": {
+                "type": "request",
+                "audience": "de regering",
+                "text": "illegaliteit strafbaar te stellen en alle illegaal in nederland verblijvende vreemdelingen "
+                        "terug te sturen naar het land van herkomst dan wel de eigen regio",
+                "points": []
+            },
+            "premises": []
+        })

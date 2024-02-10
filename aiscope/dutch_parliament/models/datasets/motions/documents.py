@@ -19,12 +19,12 @@ class Collection(CollectionBase):
 class Document(DocumentBase):
 
     def get_motion_argument_text(self) -> str | None:
-        if not (action := self.properties.get("action")) or not (premises := self.properties.get("premises")):
+        if not (action := self.properties.get("action")):
             return
 
         argument = ""
 
-        for premise_type, premise in premises:
+        for premise_type, premise in self.properties.get("premises", []):
             premise_type = PremiseTypes(premise_type)
             if premise_type == PremiseTypes.OBSERVATION:
                 argument += f"Constaterende dat {premise};\n\n"
@@ -48,11 +48,13 @@ class Document(DocumentBase):
         return argument.strip()
 
     def get_claim_texts(self) -> dict[str, str] | None:
-        if not (action := self.properties.get("action")) or not (premises := self.properties.get("premises")):
+        if not (action := self.properties.get("action")):
             return
 
-        texts = {}
-        for _, premise in premises:
+        texts = {
+            sha1(action["text"].encode("utf-8")).hexdigest(): action["text"]
+        }
+        for _, premise in self.properties.get("premises"):
             key = sha1(premise.encode("utf-8")).hexdigest()
             texts[key] = premise
         for point in action["points"]:
