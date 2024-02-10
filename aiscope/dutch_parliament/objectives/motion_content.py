@@ -7,6 +7,7 @@ from dutch_parliament.constants import ActionTypes, PremiseTypes
 class MotionContentExtractor:
 
     request_pattern = "verzoekt (?P<audience>.*) om (?P<content>.*?)[,:]"
+    request_government_pattern = "verzoekt (?P<audience>de regering) (?P<content>.*?)[,:]"
     suggestion_pattern = "doet (?P<audience>.*) de suggestie om (?P<content>.*?)[,:]"
 
     observation_pattern = r"constaterende,? dat (?P<content>.*?)[;]"
@@ -63,12 +64,15 @@ class MotionContentExtractor:
 
     @classmethod
     def get_action(cls, soup: bs4.BeautifulSoup, content: bs4.Tag) -> dict:
+        regex_flags = re.IGNORECASE | re.DOTALL
         for paragraph in content.find_all("p"):
             action = None
             paragraph_text = paragraph.text.strip().lower()
-            if request_match := re.match(cls.request_pattern, paragraph_text, re.IGNORECASE | re.DOTALL):
+            if request_match := re.match(cls.request_pattern, paragraph_text, regex_flags):
                 action = cls.parse_action_match(paragraph, request_match, ActionTypes.REQUEST)
-            elif suggestion_match := re.match(cls.suggestion_pattern, paragraph_text, re.IGNORECASE | re.DOTALL):
+            elif government_match := re.match(cls.request_government_pattern, paragraph_text, regex_flags):
+                action = cls.parse_action_match(paragraph, government_match, ActionTypes.REQUEST)
+            elif suggestion_match := re.match(cls.suggestion_pattern, paragraph_text, regex_flags):
                 action = cls.parse_action_match(paragraph, suggestion_match, ActionTypes.SUGGESTION)
             if action:
                 return action

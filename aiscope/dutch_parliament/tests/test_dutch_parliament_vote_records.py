@@ -259,3 +259,33 @@ class TestMotionRecordsExtraction(ResourceFixturesMixin, TestCase):
                 )
             ]
         })
+
+    def test_variance_government_request(self):
+        # Setup extraction
+        config = create_config("global", {
+            "objective": MOTION_CONTENT_OBJECTIVE
+        })
+        extractor = ExtractProcessor(config=config)
+        resource = DutchParlementRecord.objects.get(uri="zoek.officielebekendmakingen.nl/kst-32824-399.html")
+        # Extract content and assert
+        content = list(extractor.extract_from_resource(resource))
+        self.assertEqual(content[0], {
+            "motion_id": "kst-32824-399",
+            "action": {
+                "type": "request",
+                "audience": "de regering",
+                "text": "alle mensen waarbij het herleidbaar is dat ze onwettig zijn geregistreerd "
+                        "een persoonlijke excuusbrief te sturen namens de regering",
+                "points": []
+            },
+            "premises": [
+                (
+                    "observation",
+                    "er zonder wettelijke grondslag gegevens zijn verzameld over de nederlandse moslimgemeenschap"
+                ),
+                (
+                    "consideration",
+                    "bij de afhandeling van de fsv-registraties mensen een persoonlijke excuusbrief hebben gekregen"
+                )
+            ]
+        })
