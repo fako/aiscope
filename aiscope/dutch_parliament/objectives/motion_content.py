@@ -9,6 +9,7 @@ class MotionContentExtractor:
     request_pattern = "verzoekt (?P<audience>.*) om (?P<content>.*?)[,:]"
     request_government_pattern = "verzoekt (?P<audience>de regering) (?P<content>.*?)[,:]"
     suggestion_pattern = "doet (?P<audience>.*) de suggestie om (?P<content>.*?)[,:]"
+    pronounce_pattern = "spreekt uit dat (?P<content>.*?)[,:]"
 
     observation_pattern = r"constaterende,? dat (?P<content>.*?)[;]"
     consideration_pattern = r"overwegende,? dat (?P<content>.*?)[;]"
@@ -38,7 +39,7 @@ class MotionContentExtractor:
         if not match:
             return
         action = cls.extract_text(match.group("content"))
-        audience = match.group("audience")
+        audience = match.group("audience") if action_type != ActionTypes.PRONOUNCE else "het volk"
         points_list = paragraph.find_next_sibling("ul")
         points = []
         if points_list:
@@ -74,6 +75,8 @@ class MotionContentExtractor:
                 action = cls.parse_action_match(paragraph, government_match, ActionTypes.REQUEST)
             elif suggestion_match := re.match(cls.suggestion_pattern, paragraph_text, regex_flags):
                 action = cls.parse_action_match(paragraph, suggestion_match, ActionTypes.SUGGESTION)
+            elif pronounce_match := re.match(cls.pronounce_pattern, paragraph_text, regex_flags):
+                action = cls.parse_action_match(paragraph, pronounce_match, ActionTypes.PRONOUNCE)
             if action:
                 return action
 

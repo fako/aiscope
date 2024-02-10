@@ -310,3 +310,24 @@ class TestMotionRecordsExtraction(ResourceFixturesMixin, TestCase):
             },
             "premises": []
         })
+
+    def test_pronouncing(self):
+        # Setup extraction
+        config = create_config("global", {
+            "objective": MOTION_CONTENT_OBJECTIVE
+        })
+        extractor = ExtractProcessor(config=config)
+        resource = DutchParlementRecord.objects.get(uri="zoek.officielebekendmakingen.nl/kst-36333-46.html")
+        # Extract content and assert
+        content = list(extractor.extract_from_resource(resource))
+        self.assertEqual(content[0], {
+            "motion_id": "kst-36333-46",
+            "action": {
+                "type": "pronounce",
+                "audience": "het volk",
+                "text": "een volgend kabinet werk moet maken van een zeer aanzienlijke en "
+                        "afrekenbare inperking van de asielinstroom",
+                "points": []
+            },
+            "premises": []
+        })
