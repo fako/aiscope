@@ -331,3 +331,31 @@ class TestMotionRecordsExtraction(ResourceFixturesMixin, TestCase):
             },
             "premises": []
         })
+
+    def test_long_action_sentence(self):
+        # Setup extraction
+        config = create_config("global", {
+            "objective": MOTION_CONTENT_OBJECTIVE
+        })
+        extractor = ExtractProcessor(config=config)
+        resource = DutchParlementRecord.objects.get(uri="zoek.officielebekendmakingen.nl/kst-36333-41.html")
+        # Extract content and assert
+        content = list(extractor.extract_from_resource(resource))
+        self.assertEqual(content[0],     {
+            "motion_id": "kst-36333-41",
+            "action": {
+                "type": "request",
+                "audience": "de regering",
+                "text": "in samenspraak met gemeenten en het rijksvastgoedbedrijf geschikt leegstaand "
+                        "maatschappelijk vastgoed dat aan bepaalde minimumeisen voldoet, "
+                        "zo snel mogelijk in te zetten voor de opvang van asielzoekers",
+                "points": []
+            },
+            "premises": [
+                (
+                    "observation",
+                    "er gemeenten zijn die klaarstaan met plannen voor nieuwe asielopvangplekken die echter "
+                    "door interbestuurlijke belemmeringen moeilijk of niet gerealiseerd kunnen worden"
+                )
+            ]
+        })

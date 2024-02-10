@@ -6,10 +6,10 @@ from dutch_parliament.constants import ActionTypes, PremiseTypes
 
 class MotionContentExtractor:
 
-    request_pattern = "verzoekt (?P<audience>.*) om (?P<content>.*?)[,:]"
-    request_government_pattern = "verzoekt (?P<audience>de regering) (?P<content>.*?)[,:]"
-    suggestion_pattern = "doet (?P<audience>.*) de suggestie om (?P<content>.*?)[,:]"
-    pronounce_pattern = "spreekt uit dat (?P<content>.*?)[,:]"
+    request_pattern = "verzoekt (?P<audience>.*) om (?P<content>.*?)[,:]$"
+    request_government_pattern = "verzoekt (?P<audience>de regering) (?P<content>.*?)[,:]$"
+    suggestion_pattern = "doet (?P<audience>.*) de suggestie om (?P<content>.*?)[,:]$"
+    pronounce_pattern = "spreekt uit dat (?P<content>.*?)[,:]$"
 
     observation_pattern = r"constaterende,? dat (?P<content>.*?)[;]"
     consideration_pattern = r"overwegende,? dat (?P<content>.*?)[;]"
