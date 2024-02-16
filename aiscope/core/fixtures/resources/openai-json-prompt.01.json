@@ -1,0 +1,23 @@
+{
+    "id": "chatcmpl-8spjGHf3eswgzQVYxcOFE0A6X2EPH",
+    "object": "chat.completion",
+    "created": 1708079250,
+    "model": "gpt-3.5-turbo-0125",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "{\"topic\": \"Privacy van moslimgemeenschap in Nederland\", \"title\": \"Onrechtmatige verzameling van persoonsgegevens Nederlandse moslims\"}"
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 349,
+        "completion_tokens": 38,
+        "total_tokens": 387
+    },
+    "system_fingerprint": "fp_69829325d0"
+}

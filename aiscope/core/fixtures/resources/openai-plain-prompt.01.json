@@ -1,0 +1,23 @@
+{
+    "id": "chatcmpl-8spVxpIM8MtlCFZMXo810pDcbLy4c",
+    "object": "chat.completion",
+    "created": 1708078425,
+    "model": "gpt-3.5-turbo-0125",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "Er zijn gegevens verzameld over de Nederlandse moslimgemeenschap zonder toestemming;\n\nDit is gedaan door delen van de Nederlandse overheid, zoals de taskforce problematisch gedrag, waar persoonsgegevens op meerdere plaatsen kunnen zijn opgeslagen;\n\nDe persoonsgegevens zijn gedeeld met gemeenten, politie, ministeries en veiligheidspartners door leden van de taskforce problematisch gedrag;\n\nHet is belangrijk dat de persoonsgegevens van Nederlandse moslims niet meer worden gebruikt;\n\nDe autoriteit persoonsgegevens adviseert onderzoek te doen naar:\n\n- Wie persoonsgegevens van Nederlandse moslims heeft verzameld\n- Met wie deze informatie is gedeeld\n- Wat er met deze persoonsgegevens is gebeurd, of ze zijn gebruikt voor besluiten en of er gevolgen waren voor Nederlandse moslims vanwege de registratie van hun gegevens."
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 324,
+        "completion_tokens": 222,
+        "total_tokens": 546
+    },
+    "system_fingerprint": "fp_69829325d0"
+}

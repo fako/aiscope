@@ -1,0 +1,158 @@
+[
+    {
+        "model": "core.openaipromptresource",
+        "pk": 1,
+        "fields": {
+            "uri": "api.openai.com/v1/chat/completions",
+            "status": 200,
+            "config": "{\"_namespace\": \"global\", \"_private\": [\"_private\", \"_defaults\", \"_namespace\"]}",
+            "created_at": "2024-02-16T10:19:27.636Z",
+            "modified_at": "2024-02-16T10:19:27.636Z",
+            "purge_at": null,
+            "retainer_type": null,
+            "retainer_id": null,
+            "data_hash": "eae4264b8afb5c21494b1bbab934d6cf772bbb26",
+            "request": {
+                "url": "https://api.openai.com/v1/chat/completions",
+                "args": [
+                    "b1-language-level.tpl"
+                ],
+                "json": {
+                    "model": "gpt-3.5-turbo-0125",
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": "Herschrijf de tekst hieronder naar het taalniveau B1\\n\\nConstaterende dat er gegevens zijn verzameld over de nederlandse moslimgemeenschap zonder wettelijke grondslag;\\n\\nOverwegende dat dit is gedaan door onderdelen van de nederlandse overheid, waar verschillende ministeries en organisaties deel van uitmaken, zoals de taskforce problematisch gedrag, zodat persoonsgegevens op meerdere plekken zouden kunnen zijn opgeslagen;\\n\\nOverwegende dat persoonsgegevens ook zijn gedeeld met gemeenten, de politie, ministeries en veiligheidspartners door de leden van de taskforce problematisch gedrag;\\n\\nVan mening dat voorkomen dient te worden dat persoonsgegevens van nederlandse moslims nog ergens rondslingeren of dat de gegevens nog worden gebruikt;\\n\\nDoet de autoriteit persoonsgegevens de suggestie om onderzoek te doen naar de volgende aspecten:\\n\\n* door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld\\n* met welke actoren deze informatie vervolgens is gedeeld\\n* wat er met deze persoonsgegevens is gedaan, of het is gebruikt voor besluiten en of er mogelijk gevolgen zijn geweest voor Nederlandse moslims door de registratie van hun persoonsgegevens"
+                        }
+                    ]
+                },
+                "cancel": false,
+                "kwargs": {
+                    "model": "gpt-3.5-turbo-0125",
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": "Herschrijf de tekst hieronder naar het taalniveau B1\\n\\nConstaterende dat er gegevens zijn verzameld over de nederlandse moslimgemeenschap zonder wettelijke grondslag;\\n\\nOverwegende dat dit is gedaan door onderdelen van de nederlandse overheid, waar verschillende ministeries en organisaties deel van uitmaken, zoals de taskforce problematisch gedrag, zodat persoonsgegevens op meerdere plekken zouden kunnen zijn opgeslagen;\\n\\nOverwegende dat persoonsgegevens ook zijn gedeeld met gemeenten, de politie, ministeries en veiligheidspartners door de leden van de taskforce problematisch gedrag;\\n\\nVan mening dat voorkomen dient te worden dat persoonsgegevens van nederlandse moslims nog ergens rondslingeren of dat de gegevens nog worden gebruikt;\\n\\nDoet de autoriteit persoonsgegevens de suggestie om onderzoek te doen naar de volgende aspecten:\\n\\n* door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld\\n* met welke actoren deze informatie vervolgens is gedeeld\\n* wat er met deze persoonsgegevens is gedaan, of het is gebruikt voor besluiten en of er mogelijk gevolgen zijn geweest voor Nederlandse moslims door de registratie van hun persoonsgegevens"
+                        }
+                    ]
+                },
+                "method": "post",
+                "headers": {
+                    "Accept": "*/*",
+                    "Connection": "keep-alive",
+                    "User-Agent": "DataGrowth (v0.20.3); python-requests/2.31.0",
+                    "Content-Type": "application/json",
+                    "Accept-Encoding": "gzip, deflate"
+                },
+                "token_count": 317,
+                "backoff_delay": false
+            },
+            "head": {
+                "date": "Fri, 16 Feb 2024 10:13:49 GMT",
+                "cf-ray": "8565050f5cd965e1-FRA",
+                "server": "cloudflare",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "openai-model": "gpt-3.5-turbo-0125",
+                "x-request-id": "req_3f7f4af5ff1add989c1172c5e280e1d9",
+                "cache-control": "no-cache, must-revalidate",
+                "openai-version": "2020-10-01",
+                "cf-cache-status": "DYNAMIC",
+                "content-encoding": "gzip",
+                "transfer-encoding": "chunked",
+                "openai-organization": "datascope-search",
+                "openai-processing-ms": "3478",
+                "x-ratelimit-limit-tokens": "1000000",
+                "x-ratelimit-reset-tokens": "18ms",
+                "strict-transport-security": "max-age=15724800; includeSubDomains",
+                "x-ratelimit-limit-requests": "10000",
+                "x-ratelimit-reset-requests": "6ms",
+                "access-control-allow-origin": "*",
+                "x-ratelimit-remaining-tokens": "999692",
+                "x-ratelimit-remaining-requests": "9999"
+            },
+            "body": "openai-plain-prompt.01.json"
+        }
+    },
+    {
+        "model": "core.openaipromptresource",
+        "pk": 2,
+        "fields": {
+            "uri": "api.openai.com/v1/chat/completions",
+            "status": 200,
+            "config": "{\"_namespace\": \"global\", \"_private\": [\"_private\", \"_defaults\", \"_namespace\"]}",
+            "created_at": "2024-02-16T10:28:21.837Z",
+            "modified_at": "2024-02-16T10:28:21.837Z",
+            "purge_at": null,
+            "retainer_type": null,
+            "retainer_id": null,
+            "data_hash": "218e0712f50eb41d781ef7c28c4b84079c327faf",
+            "request": {
+                "url": "https://api.openai.com/v1/chat/completions",
+                "args": [
+                    "topic-and-title.json.tpl"
+                ],
+                "json": {
+                    "model": "gpt-3.5-turbo-0125",
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": "Ken een onderwerp toe aan de onderstaande tekst en geef deze een kop. Schrijf je reactie in het volgende JSON format:\n{\"topic\": \"string\", \"title\": \"string\"}\n\nConstaterende dat er gegevens zijn verzameld over de nederlandse moslimgemeenschap zonder wettelijke grondslag;\\n\\nOverwegende dat dit is gedaan door onderdelen van de nederlandse overheid, waar verschillende ministeries en organisaties deel van uitmaken, zoals de taskforce problematisch gedrag, zodat persoonsgegevens op meerdere plekken zouden kunnen zijn opgeslagen;\\n\\nOverwegende dat persoonsgegevens ook zijn gedeeld met gemeenten, de politie, ministeries en veiligheidspartners door de leden van de taskforce problematisch gedrag;\\n\\nVan mening dat voorkomen dient te worden dat persoonsgegevens van nederlandse moslims nog ergens rondslingeren of dat de gegevens nog worden gebruikt;\\n\\nDoet de autoriteit persoonsgegevens de suggestie om onderzoek te doen naar de volgende aspecten:\\n\\n* door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld\\n* met welke actoren deze informatie vervolgens is gedeeld\\n* wat er met deze persoonsgegevens is gedaan, of het is gebruikt voor besluiten en of er mogelijk gevolgen zijn geweest voor Nederlandse moslims door de registratie van hun persoonsgegevens"
+                        }
+                    ],
+                    "response_format": {
+                        "type": "json_object"
+                    }
+                },
+                "cancel": false,
+                "kwargs": {
+                    "model": "gpt-3.5-turbo-0125",
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": "Ken een onderwerp toe aan de onderstaande tekst en geef deze een kop. Schrijf je reactie in het volgende JSON format:\n{\"topic\": \"string\", \"title\": \"string\"}\n\nConstaterende dat er gegevens zijn verzameld over de nederlandse moslimgemeenschap zonder wettelijke grondslag;\\n\\nOverwegende dat dit is gedaan door onderdelen van de nederlandse overheid, waar verschillende ministeries en organisaties deel van uitmaken, zoals de taskforce problematisch gedrag, zodat persoonsgegevens op meerdere plekken zouden kunnen zijn opgeslagen;\\n\\nOverwegende dat persoonsgegevens ook zijn gedeeld met gemeenten, de politie, ministeries en veiligheidspartners door de leden van de taskforce problematisch gedrag;\\n\\nVan mening dat voorkomen dient te worden dat persoonsgegevens van nederlandse moslims nog ergens rondslingeren of dat de gegevens nog worden gebruikt;\\n\\nDoet de autoriteit persoonsgegevens de suggestie om onderzoek te doen naar de volgende aspecten:\\n\\n* door welke actoren persoonsgegevens van Nederlandse moslims zijn verzameld\\n* met welke actoren deze informatie vervolgens is gedeeld\\n* wat er met deze persoonsgegevens is gedaan, of het is gebruikt voor besluiten en of er mogelijk gevolgen zijn geweest voor Nederlandse moslims door de registratie van hun persoonsgegevens"
+                        }
+                    ],
+                    "response_format": {
+                        "type": "json_object"
+                    }
+                },
+                "method": "post",
+                "headers": {
+                    "Accept": "*/*",
+                    "Connection": "keep-alive",
+                    "User-Agent": "DataGrowth (v0.20.3); python-requests/2.31.0",
+                    "Content-Type": "application/json",
+                    "Accept-Encoding": "gzip, deflate"
+                },
+                "token_count": 342,
+                "backoff_delay": false
+            },
+            "head": {
+                "date": "Fri, 16 Feb 2024 10:27:30 GMT",
+                "cf-ray": "8565193028cc9bfa-FRA",
+                "server": "cloudflare",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "openai-model": "gpt-3.5-turbo-0125",
+                "x-request-id": "req_7864a404f5f0389844a75daa99d62fca",
+                "cache-control": "no-cache, must-revalidate",
+                "openai-version": "2020-10-01",
+                "cf-cache-status": "DYNAMIC",
+                "content-encoding": "gzip",
+                "transfer-encoding": "chunked",
+                "openai-organization": "datascope-search",
+                "openai-processing-ms": "516",
+                "x-ratelimit-limit-tokens": "1000000",
+                "x-ratelimit-reset-tokens": "20ms",
+                "strict-transport-security": "max-age=15724800; includeSubDomains",
+                "x-ratelimit-limit-requests": "10000",
+                "x-ratelimit-reset-requests": "6ms",
+                "access-control-allow-origin": "*",
+                "x-ratelimit-remaining-tokens": "999665",
+                "x-ratelimit-remaining-requests": "9999"
+            },
+            "body": "openai-json-prompt.01.json"
+        }
+    }
+]
