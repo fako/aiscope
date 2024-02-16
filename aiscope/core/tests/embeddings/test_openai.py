@@ -52,7 +52,6 @@ class TestOpenAIEmbeddingsResource(ResourceFixturesMixin, TestCase):
             "model": "text-embedding-ada-002",
             "encoding_format": "float",
             "input": expected_texts
-
         })
 
     def test_text_payload_to_data(self):

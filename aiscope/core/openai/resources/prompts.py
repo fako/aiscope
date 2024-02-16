@@ -110,6 +110,7 @@ class OpenaiPromptResource(HttpResource):
         request = super()._create_request(method, *args, **data)
         request["cancel"] = cancel
         request["token_count"] = token_count
+        request["kwargs"] = kwargs
         return request
 
     def handle_errors(self):
@@ -117,15 +118,15 @@ class OpenaiPromptResource(HttpResource):
         if not data:
             return
         # Check if all messages came back ok and return if so
-        is_success = all((choice for choice in data["choices"] if choice["finish_reason"] == "stop"))
+        is_success = all((choice["finish_reason"] == "stop" for choice in data["choices"]))
         if is_success:
             return True
         # Take the first error message and set that as the resource state
         error = next((choice for choice in data["choices"] if choice["finish_reason"] != "stop"))
         if error["finish_reason"] == "length":
-            self.set_error(self.ErrorCodes.MAX_TOKENS_EXCEEDED)
+            self.set_error(self.ErrorCodes.MAX_TOKENS_EXCEEDED.value)
         if error["finish_reason"] == "content_filter":
-            self.set_error(self.ErrorCodes.CONTENT_FILTER)
+            self.set_error(self.ErrorCodes.CONTENT_FILTER.value)
         return False
 
     def _send(self):
