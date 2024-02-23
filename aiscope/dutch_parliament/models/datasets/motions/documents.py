@@ -64,5 +64,5 @@ class Document(DocumentBase):
         return texts
 
     @property
-    def has_claim_texts(self) -> bool:
-        return bool(self.derivatives.get("dutch_parliament.get_claim_texts"))
+    def has_motion_texts(self) -> bool:
+        return bool(self.derivatives.get("dutch_parliament.get_motion_texts"))

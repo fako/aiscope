@@ -64,15 +64,15 @@ class MotionsDataset(DatasetBase):
         },
     ]
     DOCUMENT_TASKS = {
-        "dutch_parliament.get_claim_texts": {
+        "dutch_parliament.get_motion_texts": {
             "depends_on": ["$.action", "$.premises"],
             "resources": [],
             "checks": []
         },
-        "core.get_embeddings": {
-            "depends_on": ["dutch_parliament.get_claim_texts"],
+        "dutch_parliament.get_claim_embeddings": {
+            "depends_on": ["dutch_parliament.get_motion_texts"],
             "resources": ["core.openaiembeddingsresource"],
-            "checks": ["has_claim_texts"]
+            "checks": ["has_motion_texts"]
         }
     }
 
