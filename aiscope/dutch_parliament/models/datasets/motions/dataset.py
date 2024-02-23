@@ -73,6 +73,11 @@ class MotionsDataset(DatasetBase):
             "depends_on": ["dutch_parliament.get_motion_texts"],
             "resources": ["core.openaiembeddingsresource"],
             "checks": ["has_motion_texts"]
+        },
+        "dutch_parliament.get_b1_motion": {
+            "depends_on": ["dutch_parliament.get_motion_texts"],
+            "resources": ["core.openaipromptresource"],
+            "checks": ["has_motion_texts"]
         }
     }
 

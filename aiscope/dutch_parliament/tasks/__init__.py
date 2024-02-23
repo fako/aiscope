@@ -1,2 +1,3 @@
 from dutch_parliament.tasks.motion_texts import get_motion_texts
 from dutch_parliament.tasks.embeddings import get_claim_embeddings
+from dutch_parliament.tasks.prompts import get_b1_motion
