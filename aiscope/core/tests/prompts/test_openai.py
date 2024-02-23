@@ -182,6 +182,6 @@ class TestOpenAIEmbeddingsResource(ResourceFixturesMixin, TestCase):
     def test_empty_content(self):
         rsc = OpenaiPromptResource()
         content_type, data = rsc.content
-        
+
         self.assertIsNone(content_type)
         self.assertIsNone(data)
