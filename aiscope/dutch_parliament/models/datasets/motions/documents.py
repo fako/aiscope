@@ -44,6 +44,8 @@ class Document(DocumentBase):
             argument += f"Verzoekt {action["audience"]} om {action_text}"
         elif action_type == ActionTypes.SUGGESTION:
             argument += f"Doet {action["audience"]} de suggestie om {action_text}"
+        elif action_type == ActionTypes.PRONOUNCE:
+            argument += f"Spreek uit dat {action_text}"
 
         return argument.strip()
 
