@@ -18,6 +18,7 @@ def get_claim_embeddings(label: str, document_ids: List[int]):
         "growth_phase": "dutch_parliament.get_claim_embeddings",
         "batch_size": len(document_ids),
         "asynchronous": False,
+        "to_property": "embeddings",
         "retrieve_data": {
             "resource": "core.openaiembeddingsresource",
             "method": "post",

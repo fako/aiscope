@@ -10,6 +10,10 @@ from dutch_parliament.objectives import VOTE_RECORDS_OBJECTIVE, MOTION_VOTES_OBJ
 
 
 class MotionsDataset(DatasetBase):
+    """
+    Example growth command: ./manage.py grow_dataset dutch_parliament.MotionsDataset -a "Migratie en integratie"
+        -c "start_date=2023-01-01&end_date=2023-12-31" --limit=3
+    """
 
     GROWTH_STRATEGY = GrowthStrategy.STACK
 
