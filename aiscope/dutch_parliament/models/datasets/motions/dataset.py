@@ -4,6 +4,7 @@ from django.utils.timezone import make_aware
 
 from datagrowth.datatypes import DatasetBase
 from datagrowth.datatypes.datasets.constants import GrowthStrategy
+from datagrowth.processors import HttpSeedingProcessor, SeedingProcessorFactory
 
 from dutch_parliament.objectives import VOTE_RECORDS_OBJECTIVE, MOTION_VOTES_OBJECTIVE, MOTION_CONTENT_OBJECTIVE
 
@@ -90,3 +91,19 @@ class MotionsDataset(DatasetBase):
         kwargs.pop("$start_date", None)
         kwargs.pop("$end_date", None)
         return super().get_signature_from_input(*args, **kwargs)
+
+    def get_seeding_factories(self):
+        dataset_start_date = datetime.fromisoformat(self.config.start_date)
+        dataset_end_date = datetime.fromisoformat(self.config.end_date)
+        seeding_factories = {}
+        for year in range(dataset_start_date.year, dataset_end_date.year+1):
+            start_date = f"{year}-01-01" if year != dataset_start_date.year else \
+                f"{year}-{dataset_start_date.month:02}-{dataset_start_date.day:02}"
+            end_date = f"{year}-12-31" if year != dataset_end_date.year else \
+                f"{year}-{dataset_end_date.month:02}-{dataset_end_date.day:02}"
+            collection_name = f"end_date={end_date}&start_date={start_date}"
+            seeding_factories[collection_name] = SeedingProcessorFactory(HttpSeedingProcessor, self.SEEDING_PHASES, {
+                "start_date": start_date,
+                "end_date": end_date
+            })
+        return seeding_factories
