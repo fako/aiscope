@@ -10,7 +10,7 @@ services:
       args:  # notice that localhost builds end up in production, but production ignores special UID/GID values
         - UID=${HOST_UID}
         - GID=${HOST_GID}
-    command: uvicorn --host 0.0.0.0 --port 8080 --reload --reload-dir . --reload-dir ../datagrowth aiscope.asgi:application
+    command: uvicorn --host 0.0.0.0 --port 8080 --reload --reload-dir . --reload-dir ../datagrowth --reload-exclude .cache aiscope.asgi:application
     stdin_open: true
     tty: true
     environment:
